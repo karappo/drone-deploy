@@ -1,0 +1,27 @@
+.git/
+.sass-cache/
+.gitignore
+.depignore
+.drone.yml
+Procfile
+README
+README.*
+/_assets/
+
+# for MODX
+/assets/images/
+/assets/upload/
+/assets/uploads/
+/core/cache/
+
+# for Wordpress
+/wp/wp-content/uploads/
+
+# [ NOTICE ]
+# Comment must start with "#" but any other charactors
+# "#" in the middle of line is not allowed. (for LFTP)
+# The last line must be linebreak.
+
+# [ NOTICE ]
+# file path auto change like below in LFTP mode
+# /xxx/yyy -> xxx/yyy
