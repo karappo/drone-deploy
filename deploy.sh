@@ -16,15 +16,15 @@ do_sync()
     echo 'done.'
   fi
     
-  echo "| Syncing with $SYNC_COMMAND. This could take a while..."
+  echo "| Syncing with $DEP_COMMAND. This could take a while..."
   
-  if [ ${SYNC_COMMAND} = "rsync" ]; then
+  if [ ${DEP_COMMAND} = "rsync" ]; then
     
     opt_exclude=''
-    if [ -f $SYNC_IGNORE_FILE ]; then
-      opt_exclude="--exclude-from=$SYNC_IGNORE_FILE"
+    if [ -f $DEP_IGNORE_FILE ]; then
+      opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
-    rsync -aIzhv --stats --delete -e ssh $opt_exclude . $SYNC_USER@$SYNC_HOST:$SYNC_HOST_DIR
+    rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR
 
   else
 
@@ -38,7 +38,7 @@ do_sync()
       elif [ "${line:0:1}" != "#" -a "$line" != "" ]; then
         opt_exclude="$opt_exclude -X $line"
       fi
-    done<${SYNC_IGNORE_FILE}
+    done<${DEP_IGNORE_FILE}
 
     opt_setting=""
     if [ $FTPS = "no" ]; then
@@ -51,7 +51,7 @@ do_sync()
     fi
 
     sudo apt-get install lftp
-    lftp -u $SYNC_USER,$SYNC_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $SYNC_HOST_DIR;exit" $SYNC_HOST
+    lftp -u $DEP_USER,$DEP_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" $DEP_HOST
   
   fi
   
@@ -68,7 +68,7 @@ do_sync()
 # ----------------
 # check parameters
 
-NECESSARY_PARAMS=(SYNC_COMMAND SYNC_HOST SYNC_USER SYNC_HOST_DIR)
+NECESSARY_PARAMS=(DEP_COMMAND DEP_HOST DEP_USER DEP_HOST_DIR)
 
 for item in ${NECESSARY_PARAMS[@]}; do
   eval 'val=${'$item'}'
@@ -78,8 +78,8 @@ for item in ${NECESSARY_PARAMS[@]}; do
   fi
 done
 
-if [ $SYNC_COMMAND = "rsync" -a "${SYNC_HOST_DIR:0:1}" != "/" ]; then
-  echo "[ERROR] SYNC_HOST_DIR must be absolute: $SYNC_HOST_DIR"
+if [ $DEP_COMMAND = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
+  echo "[ERROR] DEP_HOST_DIR must be absolute: $DEP_HOST_DIR"
   exit 1
 fi
 
