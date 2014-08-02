@@ -21,8 +21,8 @@ do_sync()
   if [ ${SYNC_COMMAND} = "rsync" ]; then
     
     opt_exclude=''
-    if [ -f $SYNC_IGNORES ]; then
-      opt_exclude="--exclude-from=$SYNC_IGNORES"
+    if [ -f $SYNC_IGNORE_FILE ]; then
+      opt_exclude="--exclude-from=$SYNC_IGNORE_FILE"
     fi
     rsync -aIzhv --stats --delete -e ssh $opt_exclude . $SYNC_USER@$SYNC_HOST:$SYNC_HOST_DIR
 
@@ -38,7 +38,7 @@ do_sync()
       elif [ "${line:0:1}" != "#" -a "$line" != "" ]; then
         opt_exclude="$opt_exclude -X $line"
       fi
-    done<${SYNC_IGNORES}
+    done<${SYNC_IGNORE_FILE}
 
     opt_setting=""
     if [ $FTPS = "no" ]; then
@@ -51,7 +51,7 @@ do_sync()
     fi
 
     sudo apt-get install lftp
-    lftp -u $SYNC_USER,$SYNC_PW -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $SYNC_HOST_DIR;exit" $SYNC_HOST
+    lftp -u $SYNC_USER,$SYNC_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $SYNC_HOST_DIR;exit" $SYNC_HOST
   
   fi
   
