@@ -22,8 +22,8 @@ README.*
 # "#" in the middle of line is not allowed. (for LFTP)
 
 # [ NOTICE ]
-# The last line must be linebreak.
-
-# [ NOTICE ]
 # file path auto rewrite in LFTP mode
 # e.g. /xxx/yyy -> xxx/yyy
+
+# [ NOTICE ]
+# The last line must be linebreak.
