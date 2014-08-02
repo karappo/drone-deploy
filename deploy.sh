@@ -28,6 +28,8 @@ do_sync()
 
   else
 
+    # TODO: ignore file ga nakutemo default de .git nado wo musi suru youni
+    
     opt_exclude=""
     while read line; do
       # TODO: allow commentout in the middle of line
@@ -73,13 +75,13 @@ NECESSARY_PARAMS=(DEP_COMMAND DEP_HOST DEP_USER DEP_HOST_DIR)
 for item in ${NECESSARY_PARAMS[@]}; do
   eval 'val=${'$item'}'
   if [ ! $val ]; then
-    echo "[ERROR] Not defined: $item"
+    echo "[DEPLOY ERROR] Not defined: $item"
     exit 1
   fi
 done
 
 if [ $DEP_COMMAND = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
-  echo "[ERROR] DEP_HOST_DIR must be absolute: $DEP_HOST_DIR"
+  echo "[DEPLOY ERROR] DEP_HOST_DIR must be absolute path: $DEP_HOST_DIR"
   exit 1
 fi
 
