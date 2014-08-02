@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # for sed's "RE error: illegal byte sequence"
 # LANG=C
