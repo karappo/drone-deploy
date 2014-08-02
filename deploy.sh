@@ -21,7 +21,7 @@ do_sync()
   # download defaults if ignore file isn't exists
   if [ ${DEP_IGNORE_FILE:-isnil} = "isnil" -o ! -f "$DEP_IGNORE_FILE" ]; then
     echo "| Downloading default ignore file..."
-    wget https://raw.githubusercontent.com/KarappoInc/deploy/master/.depignore
+    wget https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
     DEP_IGNORE_FILE=$PWD/.depignore
   fi
 
