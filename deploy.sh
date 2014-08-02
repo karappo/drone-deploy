@@ -17,8 +17,14 @@ do_sync()
   fi
     
   echo "| Syncing with $DEP_COMMAND. This could take a while..."
-  
-  if [ ${DEP_COMMAND} = "rsync" ]; then
+
+  # download defaults if ignore file isn't exists
+  if [ ${DEP_IGNORE_FILE:-isnil} = "isnil" -o ! -f "$DEP_IGNORE_FILE" ]; then 
+    wget https://raw.githubusercontent.com/KarappoInc/deploy/master/.depignore
+    DEP_IGNORE_FILE=$PWD/.depignore
+  fi
+
+  if [ "$DEP_COMMAND" = "rsync" ]; then
     
     opt_exclude=''
     if [ -f $DEP_IGNORE_FILE ]; then
@@ -28,8 +34,6 @@ do_sync()
 
   else
 
-    # TODO: ignore file ga nakutemo default de .git nado wo musi suru youni
-    
     opt_exclude=""
     while read line; do
       # TODO: allow commentout in the middle of line
@@ -40,10 +44,10 @@ do_sync()
       elif [ "${line:0:1}" != "#" -a "$line" != "" ]; then
         opt_exclude="$opt_exclude -X $line"
       fi
-    done<${DEP_IGNORE_FILE}
+    done<$DEP_IGNORE_FILE
 
     opt_setting=""
-    if [ $FTPS = "no" ]; then
+    if [ "$FTPS" = "no" ]; then
       echo '< FTP >'
       opt_setting="set ftp:ssl-allow off;"
     else
@@ -80,7 +84,7 @@ for item in ${NECESSARY_PARAMS[@]}; do
   fi
 done
 
-if [ $DEP_COMMAND = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
+if [ "$DEP_COMMAND" = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
   echo "[DEPLOY ERROR] DEP_HOST_DIR must be absolute path: $DEP_HOST_DIR"
   exit 1
 fi
