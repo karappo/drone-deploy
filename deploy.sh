@@ -89,4 +89,24 @@ fi
 # ----------------
 # main
 
+# include file
+
+# from web
+if [ ${DEP_INCLUDE_FILE:+isexists} = "isexists" ]; then
+  if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" -o "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
+    echo "[DEPLOY] | Downloading include file..."
+    wget -O .depinc.sh $DEP_INCLUDE_FILE
+    DEP_INCLUDE_FILE=$PWD/.depinc.sh
+  fi
+fi
+
+if [ ${DEP_INCLUDE_FILE:-isnil} = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
+  echo "[DEPLOY] - DEP_INCLUDE_FILE -> Detect failed..."
+else
+  echo "[DEPLOY] - DEP_INCLUDE_FILE -> Detect : $DEP_INCLUDE_FILE"
+  source $DEP_INCLUDE_FILE
+fi
+
 do_sync
+
+exit 0
