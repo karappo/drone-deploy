@@ -1,12 +1,15 @@
 .git/
 .sass-cache/
 .gitignore
-.depignore
-.drone.yml
 Procfile
 README
 README.*
 /_assets/
+
+# drone-deploy
+.depignore
+.depinc.sh
+.drone.yml
 
 # for MODX
 /assets/images/
