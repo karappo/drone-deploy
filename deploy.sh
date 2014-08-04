@@ -20,7 +20,9 @@ do_sync()
     wget -O .depignore https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
     DEP_IGNORE_FILE=$PWD/.depignore
   fi
-  echo "DEP_IGNORE_FILE=$DEP_IGNORE_FILE"
+  
+  echo "[DEPLOY] - ignore file -> $DEP_IGNORE_FILE"
+
   if [ "$DEP_COMMAND" = "rsync" ]; then
     
     opt_exclude=''
