@@ -18,13 +18,14 @@ before_sync(){
   # [TODO]
   # # 不要なファイルの消去
   rm -rf ./core/cache/*
-  # rm -rf ./robots.txt
 
-  # .htaccess内の「#RM_SYNC_REMOTE 」コメントを消去
-  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_REMOTE ||" {} \;
+  # .htaccess
+  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_REMOTE ||" {} \; # 「#RM_SYNC_REMOTE 」コメントを消去
+  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \; # 「#RM_SYNC_[BRANCH] 」コメントを消去
 
-  # php内の「//RM_SYNC_REMOTE 」コメントを消去
-  find . -name "*.php" -exec sed -i$ext "s|//RM_SYNC_REMOTE ||" {} \;
+  # php
+  find . -name "*.php" -exec sed -i$ext "s|//RM_SYNC_REMOTE ||" {} \; #「//RM_SYNC_REMOTE 」コメントを消去
+  find . -name "*.php" -exec sed -i$ext "s|//RM_SYNC_${DRONE_BRANCH^^} ||" {} \; #「//RM_SYNC_[BRANCH] 」コメントを消去
   
   # [TODO]
   # ファイルディレクトリをリモート用に変換。「/Users/terada/Sites/example.com」の部分を適宜設定すること

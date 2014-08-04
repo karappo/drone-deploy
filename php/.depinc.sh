@@ -8,11 +8,13 @@ before_sync(){
   # 置換する際に一時的に作成するバックアップファイルの拡張子
   ext=".temp_bakup"
 
-  # .htaccess内の「#RM_SYNC_REMOTE 」コメントを消去
-  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_REMOTE ||" {} \;
+  # .htaccess
+  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_REMOTE ||" {} \; # 「#RM_SYNC_REMOTE 」コメントを消去
+  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \; # 「#RM_SYNC_[BRANCH] 」コメントを消去
 
-  # php内の「//RM_SYNC_REMOTE 」コメントを消去
-  find . -name "*.php" -exec sed -i$ext "s|//RM_SYNC_REMOTE ||" {} \;
+  # php
+  find . -name "*.php" -exec sed -i$ext "s|//RM_SYNC_REMOTE ||" {} \; #「//RM_SYNC_REMOTE 」コメントを消去
+  find . -name "*.php" -exec sed -i$ext "s|//RM_SYNC_${DRONE_BRANCH^^} ||" {} \; #「//RM_SYNC_[BRANCH] 」コメントを消去
 
   # バックファイルを削除
   find . -name "*$ext" -exec rm {} \;
