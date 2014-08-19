@@ -114,7 +114,7 @@ done
 # ----------------
 # default value
 
-if [ ${DEP_COMMAND:+isnil} = "isnil" ]; then
+if [ ${DEP_COMMAND:-isnil} = "isnil" ]; then
   DEP_COMMAND=lftp
 fi
 
