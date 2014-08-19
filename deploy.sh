@@ -79,7 +79,7 @@ do_sync()
     sudo apt-get install lftp
 
     if lftp -u $DEP_USER,$DEP_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" $DEP_HOST; then
-    　log "- sync -> done."
+      log "- sync -> done."
     else
       log "- sync -> [ERROR]"
       exit 1
