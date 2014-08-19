@@ -101,7 +101,7 @@ do_sync()
 # ----------------
 # check parameters
 
-NECESSARY_PARAMS=(DEP_COMMAND DEP_HOST DEP_USER DEP_HOST_DIR)
+NECESSARY_PARAMS=(DEP_HOST DEP_USER DEP_HOST_DIR)
 
 for item in ${NECESSARY_PARAMS[@]}; do
   eval 'val=${'$item'}'
@@ -111,13 +111,20 @@ for item in ${NECESSARY_PARAMS[@]}; do
   fi
 done
 
-if [ "$DEP_COMMAND" = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
-  log "- ERROR -> DEP_HOST_DIR must be absolute path: $DEP_HOST_DIR"
-  exit 1
+# ----------------
+# default value
+
+if [ ${DEP_COMMAND:+isnil} = "isnil" ]; then
+  DEP_COMMAND=lftp
 fi
 
 # ----------------
 # main
+
+if [ "$DEP_COMMAND" = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
+  log "- ERROR -> DEP_HOST_DIR must be absolute path: $DEP_HOST_DIR"
+  exit 1
+fi
 
 # include file
 
