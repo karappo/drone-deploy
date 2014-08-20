@@ -14,9 +14,8 @@ droneが提供する[Deployments](https://github.com/drone/drone#deployments)ト
 2. 対象プロジェクトのルートディレクトリに`.drone.yml`ファイルを追加 → [.drone.yml file](#droneyml-file)
 3. 対象プロジェクトにcommitしてpush
 
----
 
-### .drone.yml file
+## .drone.yml file
 
 下記の様な内容で作成します。
 
@@ -60,16 +59,16 @@ deploy:
 | DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | → [include file](#include-file)   |
 | DEP_IGNORE_FILE  | 例：`./.depignore`    | → [ignore file](#ignore-file)     |
 
-### include file
+## include file
 
 同期の前後に任意の処理を挿入することができ、これらの処理をincludeファイルに記述します。
 
-#### 用途
+### 用途
 
 - ローカルとリモートでDBの設定など違う場合に、自動的に切り替えたい
 - リモートのテスト環境のみBASIC認証をかけたい
 
-#### 使い方
+### 記述例
 
 例えば、プロジェクトのルートに`.depinc.sh`という名前でファイルを作った場合は、次のように指定します。
 
@@ -140,11 +139,11 @@ define('DB_COLLATE', '');
 ```
 
 
-### ignore file
+## ignore file
 
 同期時に転送したくないファイルを指定するためのファイルです。
 
-#### 使い方
+### 記述例
 
 例えば、プロジェクトのルートに`.depignore`という名前でファイルを作った場合は、次のように指定します。
 
