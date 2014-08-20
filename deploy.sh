@@ -40,17 +40,17 @@ do_sync()
 
   if [ "$DEP_COMMAND" = "rsync" ]; then
     
-    if [ ! `which ssh-askpass` ]; then
-      log "- ssh-askpass -> install"
-      sudo apt-get install ssh-askpass
-    fi
-    
+    # if [ ! `which sshpass` ]; then
+    #   log "- sshpass -> install"
+    #   sudo apt-get install sshpass
+    # fi
+
     opt_exclude=''
     if [ -f $DEP_IGNORE_FILE ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
 
-    if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+    if rsync -aIzhv --rsh="/usr/bin/sshpass -p $DEP_PASSWORD ssh -o StrictHostKeyChecking=no -l $DEP_USER" --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
     　log "- sync -> done."
     else
       log "- sync -> [ERROR]"
