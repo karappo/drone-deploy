@@ -10,12 +10,12 @@ droneが提供する[Deployments](https://github.com/drone/drone#deployments)ト
 ## 使い方
 
 1. droneにdeployしたい対象プロジェクトを追加
-2. 対象プロジェクトのルートディレクトリに`.drone.yml`ファイルを追加 → [.drone.ymlファイルについて](#drone_yml)
+2. 対象プロジェクトのルートディレクトリに`.drone.yml`ファイルを追加 → [.drone.yml file](#.drone.yml-file)
 3. 対象プロジェクトにcommitしてpush
 
 ---
 
-### .drone.ymlファイルについて [drone_yml]
+### .drone.yml file
 
 下記の様な内容で作成します。
 
@@ -56,10 +56,10 @@ deploy:
 | DEP_USER         |                      | ***required*** FTPまたはSSHのユーザ名      |
 | DEP_PASSWORD     |                      | ***required*** FTPまたはSSHのパスワード     |
 | DEP_HOST_DIR     | 例：`www`             | ***required*** 同期先リモートホストの展開先   |
-| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | → [includeファイルについて](#include-file)   |
-| DEP_IGNORE_FILE  | 例：`./.depignore`    | → [ignoreファイルについて](#ignore-file)     |
+| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | → [include file](#include-file)   |
+| DEP_IGNORE_FILE  | 例：`./.depignore`    | → [ignore file](#ignore-file)     |
 
-### includeファイルについて [include-file]
+### include file
 
 同期の前後に任意の処理を挿入することができ、これらの処理をincludeファイルに記述します。
 
@@ -139,7 +139,7 @@ define('DB_COLLATE', '');
 ```
 
 
-### ignoreファイルについて [ignore-file]
+### ignore file
 
 同期時に転送したくないファイルを指定するためのファイルです。
 
