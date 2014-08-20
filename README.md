@@ -36,8 +36,7 @@ deploy:
 
 **image**
 
-任意のdocker imageを指定します。
-テストなどを走らせず、単にファイルの転送だけしたい場合は`bradrydzewski/base`を指定して下さい。
+単にファイルの転送だけしたい場合は`bradrydzewski/base`を指定して下さい。
 
 **deploy**
 
