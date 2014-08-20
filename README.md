@@ -74,7 +74,6 @@ deploy:
 ```yml
 env:
   - DEP_INCLUDE_FILE=./.depinc.sh
-  ...
 ```
 
 予めホストされたファイルをダウンロードすることもできます。
@@ -82,7 +81,6 @@ env:
 ```yml
 env:
   - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/php/.depinc.sh
-  ...
 ```
 
 上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。
@@ -149,7 +147,6 @@ define('DB_COLLATE', '');
 ```yml
 env:
   - DEP_IGNORE_FILE=./.depignore
-  ...
 ```
 
 こちらもホストファイルをダウンロードでき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[こちらのファイル](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore)を参考にして下さい。
@@ -157,5 +154,4 @@ env:
 ```yml
 env:
   - DEP_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
-  ...
 ```
