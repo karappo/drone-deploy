@@ -40,6 +40,11 @@ do_sync()
 
   if [ "$DEP_COMMAND" = "rsync" ]; then
     
+    if [ ! `which ssh-askpass` ]; then
+      log "- ssh-askpass -> install"
+      sudo apt-get install ssh-askpass
+    fi
+    
     opt_exclude=''
     if [ -f $DEP_IGNORE_FILE ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
@@ -76,7 +81,11 @@ do_sync()
       opt_setting="set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-allow yes;set ftp:ssl-protect-list yes;set ftp:ssl-protect-data yes;set ftp:ssl-protect-fxp yes;"
     fi
 
-    sudo apt-get install lftp
+    if [ ! `which lftp` ]; then
+      log "- lftp -> install"
+      sudo apt-get install lftp
+    fi
+    
 
     if lftp -u $DEP_USER,$DEP_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" $DEP_HOST; then
       log "- sync -> done."
