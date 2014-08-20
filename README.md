@@ -10,7 +10,7 @@ droneが提供する[Deployments](https://github.com/drone/drone#deployments)ト
 ## 使い方
 
 1. droneにdeployしたい対象プロジェクトを追加
-2. 対象プロジェクトのルートディレクトリに`.drone.yml`ファイルを追加 → [.drone.yml file](#.drone.yml-file)
+2. 対象プロジェクトのルートディレクトリに`.drone.yml`ファイルを追加 → [.drone.yml file](#droneyml-file)
 3. 対象プロジェクトにcommitしてpush
 
 ---
