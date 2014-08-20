@@ -39,18 +39,25 @@ do_sync()
   log "- ignore file -> $DEP_IGNORE_FILE"
 
   if [ "$DEP_COMMAND" = "rsync" ]; then
-    
-    # if [ ! `which sshpass` ]; then
-    #   log "- sshpass -> install"
-    #   sudo apt-get install sshpass
-    # fi
+
+    # ------ install -------
+    # TODO: docker imageに予めインストールしておく
+    if [ ! `which ssh-askpass` ]; then
+      log "- ssh-askpass -> install"
+      sudo apt-get install ssh-askpass
+    fi
+    if [ ! `which sshpass` ]; then
+      log "- sshpass -> install"
+      sudo apt-get install sshpass
+    fi
+    # ------ /install -------
 
     opt_exclude=''
     if [ -f $DEP_IGNORE_FILE ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
-
-    if rsync -aIzhv --rsh="/usr/bin/sshpass -p $DEP_PASSWORD ssh -o StrictHostKeyChecking=no -l $DEP_USER" --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+    
+    if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
     　log "- sync -> done."
     else
       log "- sync -> [ERROR]"
@@ -58,6 +65,14 @@ do_sync()
     fi
 
   else
+
+    # ------ install -------
+    # TODO: docker imageに予めインストールしておく
+    if [ ! `which lftp` ]; then
+      log "- lftp -> install"
+      sudo apt-get install lftp
+    fi
+    # ------ /install -------
 
     opt_exclude=""
     while read line; do
@@ -80,12 +95,6 @@ do_sync()
       log "- sync -> via FTPS"
       opt_setting="set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-allow yes;set ftp:ssl-protect-list yes;set ftp:ssl-protect-data yes;set ftp:ssl-protect-fxp yes;"
     fi
-
-    if [ ! `which lftp` ]; then
-      log "- lftp -> install"
-      sudo apt-get install lftp
-    fi
-    
 
     if lftp -u $DEP_USER,$DEP_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" $DEP_HOST; then
       log "- sync -> done."
