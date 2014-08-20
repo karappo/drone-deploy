@@ -10,14 +10,14 @@ droneが提供する[Deployments](https://github.com/drone/drone#deployments)ト
 
 ## 使い方
 
-1. droneにdeployしたい対象プロジェクトを追加
-2. 対象プロジェクトのルートディレクトリに`.drone.yml`ファイルを追加 → [.drone.yml file](#droneyml-file)
+1. drone.ioに、deployの対象プロジェクトを追加
+2. 対象プロジェクトのルートに`.drone.yml`ファイルを追加 → [詳細](#droneyml)
 3. 対象プロジェクトにcommitしてpush
 
 
-## .drone.yml file
+## .drone.yml
 
-下記の様な内容で作成します。
+最低限、下記の様な内容が必要です。必要に応じて[include file](#include-file)や[ignore file](#ignore-file)を追加しましょう。
 
 ```yml
 image: bradrydzewski/base
