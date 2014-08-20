@@ -69,12 +69,11 @@ deploy:
 
 ### 記述例
 
-例えば、プロジェクトのルートに`.depinc.sh`という名前でファイルを作った場合は、次のように指定します。
+例えば、プロジェクトのルートに`.depinc.sh`という名前でファイルを作った場合は、`.drone.yml`に次のように指定します。
 
 ```yml
 env:
   - DEP_INCLUDE_FILE=./.depinc.sh
-  ...
 ```
 
 予めホストされたファイルをダウンロードすることもできます。
@@ -82,7 +81,6 @@ env:
 ```yml
 env:
   - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/php/.depinc.sh
-  ...
 ```
 
 上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。
@@ -144,12 +142,11 @@ define('DB_COLLATE', '');
 
 ### 記述例
 
-例えば、プロジェクトのルートに`.depignore`という名前でファイルを作った場合は、次のように指定します。
+例えば、プロジェクトのルートに`.depignore`という名前でファイルを作った場合は、`.drone.yml`に次のように指定します。
 
 ```yml
 env:
   - DEP_IGNORE_FILE=./.depignore
-  ...
 ```
 
 こちらもホストされたファイルをダウンロードでき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[こちらのファイル](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore)を参考にして下さい。
@@ -157,5 +154,4 @@ env:
 ```yml
 env:
   - DEP_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
-  ...
 ```
