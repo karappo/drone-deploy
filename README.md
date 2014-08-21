@@ -141,7 +141,7 @@ define('DB_COLLATE', '');
 #RM_SYNC_TEST <Files ~ "^\.(htaccess|htpasswd)$">
 #RM_SYNC_TEST deny from all
 #RM_SYNC_TEST </Files>
-#RM_SYNC_TEST AuthUserFile /home/hoge/.htpasswd
+#RM_SYNC_TEST AuthUserFile /home/example/www/.htpasswd
 #RM_SYNC_TEST AuthGroupFile /dev/null
 #RM_SYNC_TEST AuthName "Please enter your ID and password"
 #RM_SYNC_TEST AuthType Basic
