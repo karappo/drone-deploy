@@ -130,7 +130,7 @@ define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
-// / Database Settings　---------
+// -----------　/ Database Settings
 ```
 
 下記のように記述しておけば、TESTブランチの同期先のみBASIC認証をかけられます。
