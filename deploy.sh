@@ -41,13 +41,13 @@ do_sync()
   if [ "$DEP_COMMAND" = "rsync" ]; then
 
     # ------ install -------
-    # TODO: docker imageに予めインストールしておく
     if [ `which ssh-askpass` ]; then
       log "- ssh-askpass -> installed"
     else
       log "- ssh-askpass -> install"
       sudo apt-get install ssh-askpass
     fi
+
     if [ `which sshpass` ]; then
       log "- sshpass -> installed"
     else
@@ -71,7 +71,6 @@ do_sync()
   else
 
     # ------ install -------
-    # TODO: docker imageに予めインストールしておく
     if [ `which lftp` ]; then
       log "- lftp -> installed"
     else
