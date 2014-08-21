@@ -42,11 +42,15 @@ do_sync()
 
     # ------ install -------
     # TODO: docker imageに予めインストールしておく
-    if [ ! `which ssh-askpass` ]; then
+    if [ `which ssh-askpass` ]; then
+      log "- ssh-askpass -> installed"
+    else
       log "- ssh-askpass -> install"
       sudo apt-get install ssh-askpass
     fi
-    if [ ! `which sshpass` ]; then
+    if [ `which sshpass` ]; then
+      log "- sshpass -> installed"
+    else
       log "- sshpass -> install"
       sudo apt-get install sshpass
     fi
@@ -68,7 +72,9 @@ do_sync()
 
     # ------ install -------
     # TODO: docker imageに予めインストールしておく
-    if [ ! `which lftp` ]; then
+    if [ `which lftp` ]; then
+      log "- lftp -> installed"
+    else
       log "- lftp -> install"
       sudo apt-get install lftp
     fi
