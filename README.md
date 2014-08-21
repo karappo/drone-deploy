@@ -19,6 +19,7 @@ droneが提供する[Deployments](https://github.com/drone/drone#deployments)ト
 
 最低限、下記の様な内容が必要です。必要に応じて[include file](#include-file)や[ignore file](#ignore-file)を追加しましょう。
 
+.drone.yml
 ```yml
 image: bradrydzewski/base
 env:
@@ -69,8 +70,19 @@ deploy:
 
 ### 記述例
 
-例えば、プロジェクトのルートに`.depinc.sh`という名前でファイルを作った場合は、`.drone.yml`に次のように指定します。
+.depinc.sh
+```sh
+before_sync(){
+  # 同期前に行いたい処理
+}
+after_sync(){
+  # 同期後に行いたい処理
+}
+```
 
+例えば、プロジェクトのルートに上記のファイルを設置した場合は、次のように指定します。
+
+.drone.yml
 ```yml
 env:
   - DEP_INCLUDE_FILE=./.depinc.sh
@@ -78,18 +90,20 @@ env:
 
 予めホストされたファイルをダウンロードすることもできます。
 
+.drone.yml
 ```yml
 env:
-  - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/php/.depinc.sh
+  - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/include-files/php/.depinc.sh
 ```
 
-上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。
+上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/KarappoInc/drone-deploy/blob/master/include-files/php/.depinc.sh)
 
 1. `.htaccess`ファイル内の`#RM_SYNC_REMOTE ` `#RM_SYNC_[BRANCH_NAME] `を削除
 2. phpファイル内の`//RM_SYNC_REMOTE ` `//RM_SYNC_[BRANCH_NAME] `を削除
 
-例えば、Wordpressの`wp-config.php`で下記の様に記述することができます。
+例えば、Wordpressを使ったプロジェクトで下記の様に記述することができます。
 
+wp-config.php
 ```php
 // Database Settings　-----------
 
@@ -116,17 +130,18 @@ define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
-// / Database Settings　---------
+// -----------　/ Database Settings
 ```
 
-`.htaccess`に下記のように記述しておけば、TESTブランチの同期先のみBASIC認証をかけられます。
+下記のように記述しておけば、TESTブランチの同期先のみBASIC認証をかけられます。
 
+.htaccess
 ```sh
 # Basic Authentication -----------
 #RM_SYNC_TEST <Files ~ "^\.(htaccess|htpasswd)$">
 #RM_SYNC_TEST deny from all
 #RM_SYNC_TEST </Files>
-#RM_SYNC_TEST AuthUserFile /home/hoge/.htpasswd
+#RM_SYNC_TEST AuthUserFile /home/example/www/.htpasswd
 #RM_SYNC_TEST AuthGroupFile /dev/null
 #RM_SYNC_TEST AuthName "Please enter your ID and password"
 #RM_SYNC_TEST AuthType Basic
@@ -138,12 +153,29 @@ define('DB_COLLATE', '');
 
 ## ignore file
 
-同期時に転送したくないファイルを指定するためのファイルです。
+同期時に無視したいものを指定するためのファイルです。
 
 ### 記述例
 
-例えば、プロジェクトのルートに`.depignore`という名前でファイルを作った場合は、`.drone.yml`に次のように指定します。
+.depignore
+```sh
+.git/
+.sass-cache/
+.gitignore
+Procfile
+README
+README.*
+/_assets/
 
+# drone-deploy
+.depignore
+.depinc.sh
+.drone.yml
+```
+
+例えば、プロジェクトのルートに上記のファイルを設置した場合は、次のように指定します。
+
+.drone.yml
 ```yml
 env:
   - DEP_IGNORE_FILE=./.depignore
@@ -151,6 +183,7 @@ env:
 
 こちらもホストされたファイルをダウンロードでき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[こちらのファイル](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore)を参考にして下さい。
 
+.drone.yml
 ```yml
 env:
   - DEP_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
