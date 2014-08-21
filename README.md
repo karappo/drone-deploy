@@ -80,7 +80,7 @@ env:
 
 ```yml
 env:
-  - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/php/.depinc.sh
+  - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/include-files/php/.depinc.sh
 ```
 
 上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。
