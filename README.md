@@ -96,7 +96,7 @@ env:
   - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/include-files/php/.depinc.sh
 ```
 
-上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。
+上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/KarappoInc/drone-deploy/blob/master/include-files/php/.depinc.sh)
 
 1. `.htaccess`ファイル内の`#RM_SYNC_REMOTE ` `#RM_SYNC_[BRANCH_NAME] `を削除
 2. phpファイル内の`//RM_SYNC_REMOTE ` `//RM_SYNC_[BRANCH_NAME] `を削除
