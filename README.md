@@ -45,15 +45,15 @@ deploy:
 
 上記スクリプト等の中で仕様する環境変数です。
 
-| 環境変数           | 値                   | 説明                                     |
-|:---------------- |:-------------------- |:--------------------------------------- |
-| DEP_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）            |
-| DEP_HOST         | 例：`ftp.sample.com`  | ***required*** 同期先リモートホストのアドレス |
-| DEP_USER         |                      | ***required*** FTPまたはSSHのユーザ名      |
-| DEP_PASSWORD     |                      | ***required*** FTPまたはSSHのパスワード     |
-| DEP_HOST_DIR     | 例：`www`             | ***required*** 同期先リモートホストの展開先   |
-| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | → [include file](#include-file)   |
-| DEP_IGNORE_FILE  | 例：`./.depignore`    | → [ignore file](#ignore-file)     |
+| 環境変数           | 値                   | 説明                                      |
+|:---------------- |:-------------------- |:---------------------------------------- |
+| DEP_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
+| DEP_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
+| DEP_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
+| DEP_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
+| DEP_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
+| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | → [詳細](#include-file)   |
+| DEP_IGNORE_FILE  | 例：`./.depignore`    | → [詳細](#ignore-file)    |
 
 ## include file
 
@@ -135,7 +135,7 @@ define('DB_COLLATE', '');
 // -----------　/ Database Settings
 ```
 
-下記のように記述しておけば、TESTブランチの同期先のみBASIC認証をかけられます。
+下記のように記述しておけば、testブランチの同期先のみBASIC認証をかけられます。
 
 .htaccess
 ```sh
