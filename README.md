@@ -1,12 +1,10 @@
 # Drone deploy
 
 [drone.io(OSS ver.)](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
+使い方を知りたい方は、[For Users](#forusers)を、自分の環境に移植したい方は[For Developpers](#fordeveloppers)を御覧ください。
 
-droneが提供する[Deployments](https://github.com/drone/drone#deployments)トリガーの中で`deploy.sh`を読み込むことで動作します。
 
-***プロジェクト内のスクリプトの仕様が変わると意図した動作をしないことがあるので、利用する場合はforkして、[各読込先](https://github.com/KarappoInc/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2FKarappoInc%2Fdrone-deploy)を変更してください。***
-
----
+# For Users
 
 ## 使い方
 
@@ -37,13 +35,11 @@ deploy:
 
 **image**
 
-単にファイルの転送だけしたい場合は`bradrydzewski/base`を指定して下さい。
+テストの実行などがなく、単にファイルの転送だけしたい場合は`bradrydzewski/base`を指定して下さい。
 
 **deploy**
 
-ここがシステムの起点になっています。
-
-***forkしている場合は、必ずcurlのアドレスを変更して下さい。***
+ここがシステムの起点になっています。必ず、この通りに記述して下さい。
 
 **env**
 
@@ -188,3 +184,10 @@ env:
 env:
   - DEP_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
 ```
+
+
+# For Developpers
+
+このスクリプト集は、droneが提供する[Deployments](https://github.com/drone/drone#deployments)トリガーの中で`deploy.sh`を読み込むことで動作します。
+***プロジェクト内のスクリプトの仕様が変わると意図した動作をしないことがあるので、利用する場合はforkして、各読込先を変更してください。***
+変更が必要な箇所は[こちら](https://github.com/KarappoInc/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2FKarappoInc%2Fdrone-deploy)で確認して下さい。
