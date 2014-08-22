@@ -52,7 +52,7 @@ deploy:
 | DEP_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
 | DEP_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
-| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能 → [詳細](#include-file)   |
+| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file)   |
 | DEP_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
 
 ## include file
@@ -156,6 +156,8 @@ define('DB_COLLATE', '');
 ## ignore file
 
 同期時に無視したいものを指定するためのファイルです。
+
+デフォルト: `https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore`
 
 ### 記述例
 
