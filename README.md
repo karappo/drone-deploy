@@ -52,8 +52,8 @@ deploy:
 | DEP_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
 | DEP_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
-| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | → [詳細](#include-file)   |
-| DEP_IGNORE_FILE  | 例：`./.depignore`    | → [詳細](#ignore-file)    |
+| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能 → [詳細](#include-file)   |
+| DEP_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
 
 ## include file
 
