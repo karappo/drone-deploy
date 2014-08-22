@@ -84,7 +84,7 @@ env:
   - DEP_INCLUDE_FILE=./.depinc.sh
 ```
 
-予めホストされたファイルをダウンロードすることもできます。
+URLを指定することもできます。
 
 .drone.yml
 ```yml
@@ -185,7 +185,7 @@ env:
   - DEP_IGNORE_FILE=./.depignore
 ```
 
-こちらもホストされたファイルをダウンロードでき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[こちらのファイル](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore)を参考にして下さい。
+こちらもURLを指定でき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[.depignore](https://github.com/KarappoInc/drone-deploy/blob/master/.depignore)を参考にして下さい。
 
 .drone.yml
 ```yml
