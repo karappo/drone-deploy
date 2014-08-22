@@ -1,6 +1,6 @@
 # Drone deploy
 
-[drone.io(OSS ver.)](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
+[drone.ioのオープンソース版](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
 使い方を知りたい方は、[For Users](#forusers)を、自分の環境に移植したい方は[For Developpers](#fordeveloppers)を御覧ください。
 
 
