@@ -104,6 +104,8 @@ wp-config.php
 // Database Settings　-----------
 
 // Local
+
+// ローカル環境でのみ有効
 //RM_SYNC_REMOTE /*
 define('DB_NAME', 'LOCAL_DATABASE');
 define('DB_USER', 'root');
@@ -112,17 +114,21 @@ define('DB_HOST', 'localhost');
 //RM_SYNC_REMOTE */
 
 // Remote
+
+// masterブランチのデプロイ先でのみ有効
 //RM_SYNC_MASTER define('DB_NAME', 'PROD_DATABASE');
 //RM_SYNC_MASTER define('DB_USER', 'PROD_USER');
 //RM_SYNC_MASTER define('DB_PASSWORD', 'PROD_PASSWORD');
 //RM_SYNC_MASTER define('DB_HOST', 'PROD_HOST');
 
+// testブランチのデプロイ先でのみ有効
 //RM_SYNC_TEST define('DB_NAME', 'TEST_DATABASE');
 //RM_SYNC_TEST define('DB_USER', 'TEST_USER');
 //RM_SYNC_TEST define('DB_PASSWORD', 'TEST_PASSWORD');
 //RM_SYNC_TEST define('DB_HOST', 'TEST_HOST');
 
 // Common
+
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
