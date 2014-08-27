@@ -54,6 +54,7 @@ deploy:
 | DEP_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
 | DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file)   |
 | DEP_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
+| DEP_FTPS         | `no`または`yes`       | FTPS接続不可能の場合は`no`を指定。デフォルトは`yes`                         |
 
 ## include file
 
