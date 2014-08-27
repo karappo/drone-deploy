@@ -48,7 +48,7 @@ deploy:
 | 環境変数           | 値                   | 説明                                      |
 |:---------------- |:-------------------- |:---------------------------------------- |
 | DEP_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
-| DEP_FTPS         | `no`または`yes`       | FTPS接続不可能の場合は`no`を指定。デフォルトは`yes` |
+| DEP_FTPS         | `no`                 | リモート側がFTPS接続未対応の場合のみ`no`を指定。  |
 | DEP_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
 | DEP_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
