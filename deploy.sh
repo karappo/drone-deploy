@@ -92,7 +92,7 @@ do_sync()
     done<$DEP_IGNORE_FILE
 
     opt_setting=""
-    if [ "$FTPS" = "no" ]; then
+    if [ "$DEP_FTPS" = "no" ]; then
       log "- sync -> via FTP"
       opt_setting="set ftp:ssl-allow off;"
     else
