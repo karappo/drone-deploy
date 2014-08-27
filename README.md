@@ -48,13 +48,13 @@ deploy:
 | 環境変数           | 値                   | 説明                                      |
 |:---------------- |:-------------------- |:---------------------------------------- |
 | DEP_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
+| DEP_FTPS         | `no`または`yes`       | FTPS接続不可能の場合は`no`を指定。デフォルトは`yes` |
 | DEP_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
 | DEP_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
 | DEP_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
 | DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file)   |
 | DEP_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
-| DEP_FTPS         | `no`または`yes`       | FTPS接続不可能の場合は`no`を指定。デフォルトは`yes`                         |
 
 ## include file
 

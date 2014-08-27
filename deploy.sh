@@ -21,7 +21,7 @@ do_sync()
     # detect before_sync method
     echo -n "$log_label- before_sync -> Processing..."
     before_sync
-    log "- before_sync -> Done."
+    log " -> Done."
   fi
   
   # ----------------
@@ -117,7 +117,7 @@ do_sync()
     # detect after_sync method
     echo -n "$log_label- after_sync -> Processing... "
     after_sync
-    log "- after_sync -> Done."
+    log " -> Done."
   fi
 }
 
