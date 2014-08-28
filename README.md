@@ -45,16 +45,16 @@ deploy:
 
 上記スクリプト等の中で仕様する環境変数です。**`[BRANCH]`には対象とするブランチ名を大文字で代入してください。これによりブランチ毎に設定を変更できます**。
 
-| 環境変数           | 値                   | 説明                                      |
-|:---------------- |:-------------------- |:---------------------------------------- |
+| 環境変数                    | 値                   | 説明                                      |
+|:------------------------- |:-------------------- |:---------------------------------------- |
 | DEP_[BRANCH]_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
 | DEP_[BRANCH]_FTPS         | `no`                 | リモート側がFTPS接続未対応の場合のみ`no`を指定。  |
 | DEP_[BRANCH]_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
 | DEP_[BRANCH]_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_[BRANCH]_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
-| DEP_[BRANCH]_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
-| DEP_[BRANCH]_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file)   |
-| DEP_[BRANCH]_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
+| DEP_[BRANCH]_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。 |
+| DEP_[BRANCH]_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file) |
+| DEP_[BRANCH]_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)       |
 
 ## include file
 
