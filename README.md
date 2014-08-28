@@ -194,6 +194,17 @@ env:
   - DEP_MASTER_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
 ```
 
+## Errors
+
+下記のようなエラーが出る場合は、リモートがFTPS接続できない可能性があるので、`DEP_[BRANCH]_FTPS=no`を設定して下さい。
+
+```
+[DEPLOY] - sync -> via FTPS
+ftp://user:password@host.com
+mirror: Fatal error: Certificate verification: Not trusted
+[DEPLOY] - sync -> [ERROR]
+```
+
 
 # For Developpers
 
