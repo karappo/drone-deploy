@@ -1,10 +1,10 @@
 .git/
 .sass-cache/
+/_assets/
 .gitignore
 Procfile
 README
 README.*
-/_assets/
 
 # drone-deploy
 .depignore
