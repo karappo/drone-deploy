@@ -62,7 +62,7 @@ do_sync()
     fi
     
     if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
-    　log "- sync -> done."
+      log "- sync -> done."
     else
       log "- sync -> [ERROR]"
       exit 1
