@@ -124,15 +124,30 @@ do_sync()
 # ----------------
 # check parameters
 
-NECESSARY_PARAMS=(DEP_HOST DEP_USER DEP_HOST_DIR)
+ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
+NECESSARY_PARAMS=(HOST USER PASSWORD HOST_DIR)
 
-for item in ${NECESSARY_PARAMS[@]}; do
-  eval 'val=${'$item'}'
+for param in ${NECESSARY_PARAMS[@]}; do
+  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  eval 'val=${'$branch_param'}'
   if [ ! $val ]; then
-    log "- ERROR -> Not defined: $item"
+    log '- ERROR -> Not defined necessary parameter: '$branch_param
     exit 1
   fi
 done
+
+# ----------------
+# casting all parameters
+# e.g. DEP_COMMAND=${DEP_MASTER_COMMAND}
+
+for param in ${ALL_PARAMS[@]}; do
+  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  eval 'val=${'$branch_param'}'
+  if [ $val ]; then
+    eval 'DEP_'$param'='$val
+  fi
+done
+
 
 # ----------------
 # default value

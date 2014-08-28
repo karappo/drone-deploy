@@ -21,10 +21,10 @@
 ```yml
 image: bradrydzewski/base
 env:
-  - DEP_HOST=<ftphost>
-  - DEP_USER=<username>
-  - DEP_PASSWORD=<password>
-  - DEP_HOST_DIR=www
+  - DEP_MASTER_HOST=[ftphost]
+  - DEP_MASTER_USER=[username]
+  - DEP_MASTER_PASSWORD=[password]
+  - DEP_MASTER_HOST_DIR=www
 deploy:
   bash:
     command: curl https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/deploy.sh | bash
@@ -43,18 +43,18 @@ deploy:
 
 **env**
 
-上記スクリプト等の中で仕様する環境変数です。
+上記スクリプト等の中で仕様する環境変数です。**`[BRANCH]`には対象とするブランチ名を大文字で代入してください。これによりブランチ毎に設定を変更できます**。
 
 | 環境変数           | 値                   | 説明                                      |
 |:---------------- |:-------------------- |:---------------------------------------- |
-| DEP_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
-| DEP_FTPS         | `no`                 | リモート側がFTPS接続未対応の場合のみ`no`を指定。  |
-| DEP_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
-| DEP_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
-| DEP_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
-| DEP_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
-| DEP_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file)   |
-| DEP_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
+| DEP_[BRANCH]_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
+| DEP_[BRANCH]_FTPS         | `no`                 | リモート側がFTPS接続未対応の場合のみ`no`を指定。  |
+| DEP_[BRANCH]_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
+| DEP_[BRANCH]_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
+| DEP_[BRANCH]_PASSWORD     |                      | ***[required]*** FTPまたはSSHのパスワード     |
+| DEP_[BRANCH]_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。   |
+| DEP_[BRANCH]_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file)   |
+| DEP_[BRANCH]_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)    |
 
 ## include file
 
@@ -62,7 +62,7 @@ deploy:
 
 ### 用途
 
-- ローカルとリモートでDBの設定など違う場合に、自動的に切り替えたい
+- ローカルとリモートでDBの設定が違うので、自動的に切り替えたい
 - リモートのテスト環境のみBASIC認証をかけたい
 
 ### 記述例
@@ -70,10 +70,10 @@ deploy:
 .depinc.sh
 ```sh
 before_sync(){
-  # 同期前に行いたい処理
+  # 同期前に実行したい処理
 }
 after_sync(){
-  # 同期後に行いたい処理
+  # 同期後に実行したい処理
 }
 ```
 
@@ -82,7 +82,7 @@ after_sync(){
 .drone.yml
 ```yml
 env:
-  - DEP_INCLUDE_FILE=./.depinc.sh
+  - DEP_MASTER_INCLUDE_FILE=./.depinc.sh
 ```
 
 URLを指定することもできます。
@@ -90,13 +90,13 @@ URLを指定することもできます。
 .drone.yml
 ```yml
 env:
-  - DEP_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/include-files/php/.depinc.sh
+  - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/include-files/php/.depinc.sh
 ```
 
 上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/KarappoInc/drone-deploy/blob/master/include-files/php/.depinc.sh)
 
-1. `.htaccess`ファイル内の`#RM_SYNC_REMOTE ` `#RM_SYNC_[BRANCH_NAME] `を削除
-2. phpファイル内の`//RM_SYNC_REMOTE ` `//RM_SYNC_[BRANCH_NAME] `を削除
+1. `.htaccess`ファイル内の`#RM_SYNC_REMOTE ` `#RM_SYNC_[BRANCH] `を削除
+2. phpファイル内の`//RM_SYNC_REMOTE ` `//RM_SYNC_[BRANCH] `を削除
 
 例えば、Wordpressを使ったプロジェクトで下記の様に記述することができます。
 
@@ -107,26 +107,26 @@ wp-config.php
 // Local
 
 // ローカル環境でのみ有効
-//RM_SYNC_REMOTE /*
+//DEP_REMOTE_RM /*
 define('DB_NAME', 'LOCAL_DATABASE');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_HOST', 'localhost');
-//RM_SYNC_REMOTE */
+//DEP_REMOTE_RM */
 
 // Remote
 
 // masterブランチのデプロイ先でのみ有効
-//RM_SYNC_MASTER define('DB_NAME', 'PROD_DATABASE');
-//RM_SYNC_MASTER define('DB_USER', 'PROD_USER');
-//RM_SYNC_MASTER define('DB_PASSWORD', 'PROD_PASSWORD');
-//RM_SYNC_MASTER define('DB_HOST', 'PROD_HOST');
+//DEP_MASTER_RM define('DB_NAME', 'PROD_DATABASE');
+//DEP_MASTER_RM define('DB_USER', 'PROD_USER');
+//DEP_MASTER_RM define('DB_PASSWORD', 'PROD_PASSWORD');
+//DEP_MASTER_RM define('DB_HOST', 'PROD_HOST');
 
 // testブランチのデプロイ先でのみ有効
-//RM_SYNC_TEST define('DB_NAME', 'TEST_DATABASE');
-//RM_SYNC_TEST define('DB_USER', 'TEST_USER');
-//RM_SYNC_TEST define('DB_PASSWORD', 'TEST_PASSWORD');
-//RM_SYNC_TEST define('DB_HOST', 'TEST_HOST');
+//DEP_TEST_RM define('DB_NAME', 'TEST_DATABASE');
+//DEP_TEST_RM define('DB_USER', 'TEST_USER');
+//DEP_TEST_RM define('DB_PASSWORD', 'TEST_PASSWORD');
+//DEP_TEST_RM define('DB_HOST', 'TEST_HOST');
 
 // Common
 
@@ -141,15 +141,15 @@ define('DB_COLLATE', '');
 .htaccess
 ```sh
 # Basic Authentication -----------
-#RM_SYNC_TEST <Files ~ "^\.(htaccess|htpasswd)$">
-#RM_SYNC_TEST deny from all
-#RM_SYNC_TEST </Files>
-#RM_SYNC_TEST AuthUserFile /home/example/www/.htpasswd
-#RM_SYNC_TEST AuthGroupFile /dev/null
-#RM_SYNC_TEST AuthName "Please enter your ID and password"
-#RM_SYNC_TEST AuthType Basic
-#RM_SYNC_TEST require valid-user 
-#RM_SYNC_TEST order deny,allow
+#DEP_TEST_RM <Files ~ "^\.(htaccess|htpasswd)$">
+#DEP_TEST_RM deny from all
+#DEP_TEST_RM </Files>
+#DEP_TEST_RM AuthUserFile /home/example/www/.htpasswd
+#DEP_TEST_RM AuthGroupFile /dev/null
+#DEP_TEST_RM AuthName "Please enter your ID and password"
+#DEP_TEST_RM AuthType Basic
+#DEP_TEST_RM require valid-user 
+#DEP_TEST_RM order deny,allow
 # ----------- / Basic Authentication
 ```
 
@@ -183,7 +183,7 @@ README.*
 .drone.yml
 ```yml
 env:
-  - DEP_IGNORE_FILE=./.depignore
+  - DEP_MASTER_IGNORE_FILE=./.depignore
 ```
 
 こちらもURLを指定でき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[.depignore](https://github.com/KarappoInc/drone-deploy/blob/master/.depignore)を参考にして下さい。
@@ -191,7 +191,7 @@ env:
 .drone.yml
 ```yml
 env:
-  - DEP_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
+  - DEP_MASTER_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
 ```
 
 
