@@ -20,6 +20,8 @@
 .drone.yml
 ```yml
 image: bradrydzewski/base
+git:
+  depth: 1
 env:
   - DEP_MASTER_HOST=[ftphost]
   - DEP_MASTER_USER=[username]
@@ -36,6 +38,10 @@ deploy:
 **image**
 
 テストの実行などがなく、単にファイルの転送だけしたい場合は`bradrydzewski/base`を指定して下さい。
+
+**git**
+
+git cloneする時の引数を指定できます。`depth: 1`にしておくと、履歴情報を取得せずに最新のソースツリーの内容だけ取ってくるので動作が早くなります。特別なことをしない限り付けておくのが良いでしょう。
 
 **deploy**
 
