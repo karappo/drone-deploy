@@ -28,8 +28,8 @@ before_sync(){
   find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
   
   # [TODO]
-  # ファイルディレクトリをリモート用に変換。「/Users/terada/Sites/example.com」の部分を適宜設定すること
-  find . -name "*.php" -exec sed -i$ext "s|/Users/terada/Sites/example.com|$DEP_HOST|g" {} \;
+  # ファイルディレクトリをリモート用に変換。「/Users/terada/Sites/example.com」と「/home/remote/example.com」の部分を適宜設定すること
+  find . -name "*.php" -exec sed -i$ext "s|/Users/terada/Sites/example.com|/home/remote/example.com|g" {} \;
 
   # [TODO]
   # 「localhost」をリモート用に変換
