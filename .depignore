@@ -3,6 +3,9 @@
 /_assets/
 .gitignore
 Procfile
+Gruntfile.*
+gulpfile.*
+package.json
 README
 README.*
 
