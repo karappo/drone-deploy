@@ -63,22 +63,23 @@ do_sync()
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
 
-
-    RSYNC_COMMAND=rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR
-
     # with password
     if [ -f $DEP_PASSWORD ]; then
-      RSYNC_COMMAND=sshpass -p $DEP_PASSWORD $RSYNC_COMMAND
-    fi
-
-    log '-----'
-    log $RSYNC_COMMAND
-
-    if $RSYNC_COMMAND; then
-      log "- sync -> done."
+      log '-----with passowd'
+      if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+        log "- sync -> done."
+      else
+        log "- sync -> [ERROR]"
+        exit 1
+      fi
     else
-      log "- sync -> [ERROR]"
-      exit 1
+      log '-----without passowd'
+      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+        log "- sync -> done."
+      else
+        log "- sync -> [ERROR]"
+        exit 1
+      fi
     fi
 
   else
