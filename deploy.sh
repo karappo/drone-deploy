@@ -135,23 +135,6 @@ do_sync()
 # check parameters
 
 ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
-
-# log '-'
-# log "$DEP_${DRONE_BRANCH^^}_COMMAND"
-# log '-'
-# log $DEP_2015MASTER_COMMAND
-# log '-'
-# log '$DEP_'${DRONE_BRANCH^^}'_COMMAND'
-# log '-'
-# log 'DEP_'${DRONE_BRANCH^^}'_COMMAND'
-# log '-'
-# if [ '$DEP_'${DRONE_BRANCH^^}'_COMMAND' = "rsync" ]; then
-#   log '-----1'
-#   NECESSARY_PARAMS=(HOST USER HOST_DIR)
-# else
-#   log '-----2'
-#   NECESSARY_PARAMS=(HOST USER PASSWORD HOST_DIR)
-# fi
 NECESSARY_PARAMS=(HOST USER HOST_DIR)
 
 for param in ${NECESSARY_PARAMS[@]}; do
