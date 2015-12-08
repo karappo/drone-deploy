@@ -135,7 +135,14 @@ do_sync()
 # check parameters
 
 ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
-NECESSARY_PARAMS=(HOST USER PASSWORD HOST_DIR)
+
+if [ 'DEP_'${DRONE_BRANCH^^}'_COMMAND' = "rsync" ]; then
+  echo '-----1'
+  NECESSARY_PARAMS=(HOST USER HOST_DIR)
+else
+  echo '-----2'
+  NECESSARY_PARAMS=(HOST USER PASSWORD HOST_DIR)
+fi
 
 for param in ${NECESSARY_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
@@ -145,6 +152,8 @@ for param in ${NECESSARY_PARAMS[@]}; do
     exit 1
   fi
 done
+
+if
 
 # ----------------
 # casting all parameters
