@@ -163,8 +163,6 @@ for param in ${NECESSARY_PARAMS[@]}; do
   fi
 done
 
-if
-
 # ----------------
 # casting all parameters
 # e.g. DEP_COMMAND=${DEP_MASTER_COMMAND}
