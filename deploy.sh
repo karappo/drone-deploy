@@ -48,7 +48,7 @@ do_sync()
       sudo apt-get install ssh-askpass
     fi
 
-    if ![ ${DEP_PASSWORD:-isnil} = "isnil" ]; then
+    if [ ${DEP_PASSWORD:+isexists} = "isexists" ]; then
       if [ `which sshpass` ]; then
         log "- sshpass -> installed"
       else
@@ -63,17 +63,17 @@ do_sync()
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
 
-    if [ ${DEP_PASSWORD:-isnil} = "isnil" ]; then
-      log '-----without passowd'
-      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+    if [ ${DEP_PASSWORD:+isexists} = "isexists" ]; then
+      log 'rsync with passowd'
+      if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
         exit 1
       fi
     else
-      log '-----with passowd'
-      if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+      log 'rsync without passowd'
+      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
