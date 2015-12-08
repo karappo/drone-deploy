@@ -23,7 +23,7 @@ do_sync()
     before_sync
     log " -> Done."
   fi
-  
+
   # ----------------
   # Sync
 
@@ -35,7 +35,7 @@ do_sync()
     wget -O .depignore https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
     DEP_IGNORE_FILE=$PWD/.depignore
   fi
-  
+
   log "- ignore file -> $DEP_IGNORE_FILE"
 
   if [ "$DEP_COMMAND" = "rsync" ]; then
@@ -48,11 +48,13 @@ do_sync()
       sudo apt-get install ssh-askpass
     fi
 
-    if [ `which sshpass` ]; then
-      log "- sshpass -> installed"
-    else
-      log "- sshpass -> install"
-      sudo apt-get install sshpass
+    if [ ${DEP_PASSWORD:+isexists} = "isexists" ]; then
+      if [ `which sshpass` ]; then
+        log "- sshpass -> installed"
+      else
+        log "- sshpass -> install"
+        sudo apt-get install sshpass
+      fi
     fi
     # ------ /install -------
 
@@ -60,12 +62,23 @@ do_sync()
     if [ -f $DEP_IGNORE_FILE ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
-    
-    if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
-      log "- sync -> done."
+
+    if [ ${DEP_PASSWORD:+isexists} = "isexists" ]; then
+      log 'rsync with passowd'
+      if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+        log "- sync -> done."
+      else
+        log "- sync -> [ERROR]"
+        exit 1
+      fi
     else
-      log "- sync -> [ERROR]"
-      exit 1
+      log 'rsync without passowd'
+      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+        log "- sync -> done."
+      else
+        log "- sync -> [ERROR]"
+        exit 1
+      fi
     fi
 
   else
@@ -107,7 +120,7 @@ do_sync()
       log "- sync -> [ERROR]"
       exit 1
     fi
-    
+
   fi
 
   # ----------------
@@ -125,7 +138,7 @@ do_sync()
 # check parameters
 
 ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
-NECESSARY_PARAMS=(HOST USER PASSWORD HOST_DIR)
+NECESSARY_PARAMS=(HOST USER HOST_DIR)
 
 for param in ${NECESSARY_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
