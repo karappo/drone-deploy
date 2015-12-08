@@ -48,7 +48,7 @@ do_sync()
       sudo apt-get install ssh-askpass
     fi
 
-    if [ -f $DEP_PASSWORD ]; then
+    if ![ ${DEP_PASSWORD:-isnil} = "isnil" ]; then
       if [ `which sshpass` ]; then
         log "- sshpass -> installed"
       else
