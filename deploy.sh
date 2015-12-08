@@ -136,7 +136,12 @@ do_sync()
 
 ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
 
-if [ 'DEP_'${DRONE_BRANCH^^}'_COMMAND' = "rsync" ]; then
+log '-'
+log '$DEP_'${DRONE_BRANCH^^}'_COMMAND'
+log '-'
+log 'DEP_'${DRONE_BRANCH^^}'_COMMAND'
+log '-'
+if [ '$DEP_'${DRONE_BRANCH^^}'_COMMAND' = "rsync" ]; then
   log '-----1'
   NECESSARY_PARAMS=(HOST USER HOST_DIR)
 else
