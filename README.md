@@ -29,7 +29,7 @@ env:
   - DEP_MASTER_HOST_DIR=www
 deploy:
   bash:
-    command: curl https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/deploy.sh | bash
+    command: curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 ```
 
 各変数について説明します。
@@ -59,7 +59,7 @@ git cloneする時の引数を指定できます。`depth: 1`にしておくと�
 | DEP_[BRANCH]_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_[BRANCH]_PASSWORD     |                      | ***[required]※*** FTPまたはSSHのパスワード。 同期コマンドがrsyncかつ公開鍵で認証する場合は不要です。 |
 | DEP_[BRANCH]_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先。同期コマンドがrsyncの場合は絶対パスになります。 |
-| DEP_[BRANCH]_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore) → [詳細](#include-file) |
+| DEP_[BRANCH]_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能。[デフォルト](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) → [詳細](#include-file) |
 | DEP_[BRANCH]_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file)       |
 
 ## include file
@@ -96,10 +96,10 @@ URLを指定することもできます。
 .drone.yml
 ```yml
 env:
-  - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/include-files/php/.depinc.sh
+  - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/php/.depinc.sh
 ```
 
-上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/KarappoInc/drone-deploy/blob/master/include-files/php/.depinc.sh)
+上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/karappo/drone-deploy/blob/master/include-files/php/.depinc.sh)
 
 1. `.htaccess`ファイル内の`#RM_SYNC_REMOTE ` `#RM_SYNC_[BRANCH] `を削除
 2. phpファイル内の`//RM_SYNC_REMOTE ` `//RM_SYNC_[BRANCH] `を削除
@@ -164,7 +164,7 @@ define('DB_COLLATE', '');
 
 同期時に無視したいものを指定するためのファイルです。
 
-デフォルト: `https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore`
+デフォルト: `https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore`
 
 ### 記述例
 
@@ -192,12 +192,12 @@ env:
   - DEP_MASTER_IGNORE_FILE=./.depignore
 ```
 
-こちらもURLを指定でき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[.depignore](https://github.com/KarappoInc/drone-deploy/blob/master/.depignore)を参考にして下さい。
+こちらもURLを指定でき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[.depignore](https://github.com/karappo/drone-deploy/blob/master/.depignore)を参考にして下さい。
 
 .drone.yml
 ```yml
 env:
-  - DEP_MASTER_IGNORE_FILE=https://raw.githubusercontent.com/KarappoInc/drone-deploy/master/.depignore
+  - DEP_MASTER_IGNORE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore
 ```
 
 ## Errors
@@ -216,4 +216,4 @@ mirror: Fatal error: Certificate verification: Not trusted
 
 このスクリプト集は、droneが提供する[Deployments](https://github.com/drone/drone#deployments)トリガーの中で`deploy.sh`を読み込むことで動作します。
 ***プロジェクト内のスクリプトの仕様が変わると意図した動作をしないことがあるので、利用する場合はforkして、各読込先を変更してください。***
-変更が必要な箇所は[こちら](https://github.com/KarappoInc/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2FKarappoInc%2Fdrone-deploy)で確認して下さい。
+変更が必要な箇所は[こちら](https://github.com/karappo/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2Fkarappo%2Fdrone-deploy)で確認して下さい。
