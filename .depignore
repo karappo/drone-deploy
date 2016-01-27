@@ -8,6 +8,9 @@ gulpfile.*
 package.json
 README
 README.*
+.ruby-version
+Gemfile
+Gemfile.lock
 
 # drone-deploy
 .depignore
