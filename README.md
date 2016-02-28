@@ -19,7 +19,7 @@
 
 .drone.yml
 ```yml
-image: bradrydzewski/base
+image: karappo/dronedeploy
 git:
   depth: 1
 env:
@@ -37,7 +37,9 @@ deploy:
 
 **image**
 
-テストの実行などがなく、単にファイルの転送だけしたい場合は`bradrydzewski/base`を指定して下さい。
+テストの実行などがなく、単にファイルの転送だけしたい場合は[karappo/dronedeploy](https://hub.docker.com/r/karappo/dronedeploy/)を指定して下さい。
+必要なツールがインストール済みのイメージなので、`bradrydzewski/base`よりも高速です。
+`karappo/dronedeployの`Dockerfileは[こちら](https://github.com/karappo/drone-deploy-images/blob/master/builder/base/Dockerfile)にあります。
 
 **git**
 
