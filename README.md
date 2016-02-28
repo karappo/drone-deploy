@@ -35,21 +35,21 @@ deploy:
 各変数について説明します。
 
 
-**image**
+#### image
 
 テストの実行などがなく、単にファイルの転送だけしたい場合は[karappo/dronedeploy](https://hub.docker.com/r/karappo/dronedeploy/)を指定して下さい。
 必要なツールがインストール済みのイメージなので、`bradrydzewski/base`よりも高速です。
 `karappo/dronedeployの`Dockerfileは[こちら](https://github.com/karappo/drone-deploy-images/blob/master/builder/base/Dockerfile)にあります。
 
-**git**
+#### git
 
 git cloneする時の引数を指定できます。`depth: 1`にしておくと、履歴情報を取得せずに最新のソースツリーの内容だけ取ってくるので動作が早くなります。特別なことをしない限り付けておくのが良いでしょう。
 
-**deploy**
+#### deploy
 
 ここがシステムの起点になっています。必ず、この通りに記述して下さい。
 
-**env**
+#### env
 
 上記スクリプト等の中で仕様する環境変数です。**`[BRANCH]`には対象とするブランチ名を大文字で代入してください。これによりブランチ毎に設定を変更できます**。
 
