@@ -165,7 +165,7 @@ done
 # ----------------
 # default value
 
-if [ ${DEP_COMMAND:-isnil} = "isnil" ]; then
+if [ "${DEP_COMMAND:-isnil}" = "isnil" ]; then
   DEP_COMMAND=lftp
 fi
 
@@ -180,7 +180,7 @@ fi
 # include file
 
 # from web
-if [ ${DEP_INCLUDE_FILE:+isexists} = "isexists" ]; then
+if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
   if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" -o "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
     log "| Downloading include file..."
     wget -O .depinc.sh $DEP_INCLUDE_FILE
@@ -188,7 +188,7 @@ if [ ${DEP_INCLUDE_FILE:+isexists} = "isexists" ]; then
   fi
 fi
 
-if [ ${DEP_INCLUDE_FILE:-isnil} = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
+if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
   log "- include file -> Detect failed..."
 else
   log "- include file -> Detect : $DEP_INCLUDE_FILE"
