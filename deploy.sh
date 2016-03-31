@@ -184,6 +184,7 @@ if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
   if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" -o "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
     log "| Downloading include file..."
     log $DEP_INCLUDE_FILE
+    touch "test.txt"
     wget -O .depinc.sh $DEP_INCLUDE_FILE
     log "======"
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
