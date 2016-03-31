@@ -186,8 +186,8 @@ if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
     log $DEP_INCLUDE_FILE
     whoami
     sudo touch "test.txt"
-    wget -O .depinc.sh $DEP_INCLUDE_FILE
-    log "======"
+    sudo rm "test.txt"
+    sudo wget -O .depinc.sh $DEP_INCLUDE_FILE
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
   fi
 fi
