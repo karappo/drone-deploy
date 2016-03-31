@@ -3,7 +3,6 @@
 [Drone 0.4x](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
 使い方を知りたい方は、[For Users](#forusers)を、自分の環境に移植したい方は[For Developpers](#fordeveloppers)を御覧ください。
 
-
 # For Users
 
 ## 使い方
@@ -24,10 +23,10 @@ clone:
 build:
   image: karappo/dronedeploy
   environment:
-  - DEP_MASTER_HOST=[ftphost]
-  - DEP_MASTER_USER=[username]
-  - DEP_MASTER_PASSWORD=[password]
-  - DEP_MASTER_HOST_DIR=www
+    - DEP_MASTER_HOST=[ftphost]
+    - DEP_MASTER_USER=[username]
+    - DEP_MASTER_PASSWORD=[password]
+    - DEP_MASTER_HOST_DIR=www
   commands:
     - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 ```
