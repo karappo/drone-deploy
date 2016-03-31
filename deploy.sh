@@ -185,15 +185,10 @@ if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
     log "| Downloading include file..."
     log $DEP_INCLUDE_FILE
     whoami
-    touch "test.txt"
+    sudo touch "test.txt"
     wget -O .depinc.sh $DEP_INCLUDE_FILE
     log "======"
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
-    log "------"
-    ls -la
-    chmod +x $DEP_INCLUDE_FILE
-    ls -la
-    log "------"
   fi
 fi
 
