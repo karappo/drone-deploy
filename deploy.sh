@@ -185,9 +185,11 @@ if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
     log "| Downloading include file..."
     wget -O .depinc.sh $DEP_INCLUDE_FILE
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
+    echo "------"
     ls -la
     chmod +x $DEP_INCLUDE_FILE
     ls -la
+    echo "------"
   fi
 fi
 
