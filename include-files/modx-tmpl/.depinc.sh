@@ -20,29 +20,29 @@ before_sync(){
   rm -rf ./core/cache/*
 
   # .htaccess
-  find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \; # 「#DEP_REMOTE_RM 」コメントを消去
-  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \; # 「#RM_SYNC_[BRANCH] 」コメントを消去
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \; # 「#DEP_REMOTE_RM 」コメントを消去
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \; # 「#RM_SYNC_[BRANCH] 」コメントを消去
 
   # php
-  find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \; #「//DEP_REMOTE_RM 」コメントを消去
-  find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
-  
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \; #「//DEP_REMOTE_RM 」コメントを消去
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
+
   # [TODO]
   # ファイルディレクトリをリモート用に変換。「/Users/terada/Sites/example.com」と「/home/remote/example.com」の部分を適宜設定すること
-  find . -name "*.php" -exec sed -i$ext "s|/Users/terada/Sites/example.com|/home/remote/example.com|g" {} \;
+  sudo find . -name "*.php" -exec sed -i$ext "s|/Users/terada/Sites/example.com|/home/remote/example.com|g" {} \;
 
   # [TODO]
   # 「localhost」をリモート用に変換
-  find . -name "*.php" -exec sed -i$ext "s|localhost|$DEP_HOST|g" {} \;
+  sudo find . -name "*.php" -exec sed -i$ext "s|localhost|$DEP_HOST|g" {} \;
 
   # [TODO]
   # （任意）
   # リモートのDBサーバーへのアクセスが「localhost」のみの場合はもう一度元に戻しておく
-  # find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_server = '$DEP_HOST';|database_server = 'localhost';|" {} \;
-  # find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_dsn = 'mysql:host=$DEP_HOST;|database_dsn = 'mysql:host=localhost;|" {} \;
-  
+  # sudo find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_server = '$DEP_HOST';|database_server = 'localhost';|" {} \;
+  # sudo find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_dsn = 'mysql:host=$DEP_HOST;|database_dsn = 'mysql:host=localhost;|" {} \;
+
   # バックファイルを削除
-  find . -name "*$ext" -exec rm {} \;
+  sudo find . -name "*$ext" -exec rm {} \;
 
   return
 }
