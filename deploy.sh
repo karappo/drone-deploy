@@ -183,10 +183,6 @@ fi
 if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
   if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" -o "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
     log "| Downloading include file..."
-    log $DEP_INCLUDE_FILE
-    whoami
-    sudo touch "test.txt"
-    sudo rm "test.txt"
     sudo wget -O .depinc.sh $DEP_INCLUDE_FILE
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
   fi
