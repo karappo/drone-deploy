@@ -9,15 +9,15 @@ before_sync(){
   ext=".temp_bakup"
 
   # .htaccess
-  find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \; # 「#DEP_REMOTE_RM 」コメントを消去
-  find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_${DRONE_BRANCH^^}_RM ||" {} \; # 「#DEP_[BRANCH]_RM 」コメントを消去
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \; # 「#DEP_REMOTE_RM 」コメントを消去
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_${DRONE_BRANCH^^}_RM ||" {} \; # 「#DEP_[BRANCH]_RM 」コメントを消去
 
   # php
-  find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \; #「//DEP_REMOTE_RM 」コメントを消去
-  find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \; #「//DEP_REMOTE_RM 」コメントを消去
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
 
   # バックファイルを削除
-  find . -name "*$ext" -exec rm {} \;
+  sudo find . -name "*$ext" -exec rm {} \;
 
   return
 }
