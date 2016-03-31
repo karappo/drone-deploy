@@ -1,6 +1,6 @@
 # Drone deploy
 
-[drone.ioのオープンソース版](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
+[Drone 0.4x](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
 使い方を知りたい方は、[For Users](#forusers)を、自分の環境に移植したい方は[For Developpers](#fordeveloppers)を御覧ください。
 
 
@@ -19,17 +19,17 @@
 
 .drone.yml
 ```yml
-image: karappo/dronedeploy
-git:
+clone:
   depth: 1
-env:
+build:
+  image: karappo/dronedeploy
+  environment:
   - DEP_MASTER_HOST=[ftphost]
   - DEP_MASTER_USER=[username]
   - DEP_MASTER_PASSWORD=[password]
   - DEP_MASTER_HOST_DIR=www
-deploy:
-  bash:
-    command: curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
+  commands:
+    - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 ```
 
 各変数について説明します。
@@ -89,16 +89,18 @@ after_sync(){
 
 .drone.yml
 ```yml
-env:
-  - DEP_MASTER_INCLUDE_FILE=./.depinc.sh
+build:
+  environment:
+    - DEP_MASTER_INCLUDE_FILE=./.depinc.sh
 ```
 
 URLを指定することもできます。
 
 .drone.yml
 ```yml
-env:
-  - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/php/.depinc.sh
+build:
+  environment:
+    - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/php/.depinc.sh
 ```
 
 上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/karappo/drone-deploy/blob/master/include-files/php/.depinc.sh)
@@ -190,16 +192,18 @@ README.*
 
 .drone.yml
 ```yml
-env:
-  - DEP_MASTER_IGNORE_FILE=./.depignore
+build:
+  environment:
+    - DEP_MASTER_IGNORE_FILE=./.depignore
 ```
 
 こちらもURLを指定でき、デフォルトでは下記のように指定されています。オリジナルで作成する場合は、[.depignore](https://github.com/karappo/drone-deploy/blob/master/.depignore)を参考にして下さい。
 
 .drone.yml
 ```yml
-env:
-  - DEP_MASTER_IGNORE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore
+build:
+  environment:
+    - DEP_MASTER_IGNORE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore
 ```
 
 ## Errors
