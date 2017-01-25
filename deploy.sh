@@ -135,10 +135,38 @@ do_sync()
 }
 
 # ----------------
-# check parameters
 
 ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
 NECESSARY_PARAMS=(HOST USER HOST_DIR)
+
+# ----------------
+# casting all parameters
+# e.g. DEP_COMMAND=${DEP_MASTER_COMMAND}
+
+# default value
+
+DEP_COMMAND=lftp
+
+# Load DEP_REMOTE_XXX
+for param in ${ALL_PARAMS[@]}; do
+  branch_param='DEP_REMOTE_'$param
+  eval 'val=${'$branch_param'}'
+  if [ $val ]; then
+    eval 'DEP_'$param'='$val
+  fi
+done
+
+# Load DEP_{BRANCH}_XXX
+for param in ${ALL_PARAMS[@]}; do
+  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  eval 'val=${'$branch_param'}'
+  if [ $val ]; then
+    eval 'DEP_'$param'='$val
+  fi
+done
+
+# ----------------
+# check parameters
 
 for param in ${NECESSARY_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
@@ -150,24 +178,13 @@ for param in ${NECESSARY_PARAMS[@]}; do
 done
 
 # ----------------
-# casting all parameters
-# e.g. DEP_COMMAND=${DEP_MASTER_COMMAND}
 
+log '---------------'
 for param in ${ALL_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
-  eval 'val=${'$branch_param'}'
-  if [ $val ]; then
-    eval 'DEP_'$param'='$val
-  fi
+  log 'DEP_'${DRONE_BRANCH^^}'_'$param' : '$branch_param
 done
-
-
-# ----------------
-# default value
-
-if [ "${DEP_COMMAND:-isnil}" = "isnil" ]; then
-  DEP_COMMAND=lftp
-fi
+exit 0
 
 # ----------------
 # main
