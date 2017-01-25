@@ -147,7 +147,7 @@ NECESSARY_PARAMS=(HOST USER HOST_DIR)
 
 DEP_COMMAND=lftp
 
-# Load DEP_REMOTE_XXX
+# Load default value from DEP_REMOTE_XXX
 for param in ${ALL_PARAMS[@]}; do
   branch_param='DEP_REMOTE_'$param
   eval 'val=${'$branch_param'}'
@@ -156,7 +156,7 @@ for param in ${ALL_PARAMS[@]}; do
   fi
 done
 
-# Load DEP_{BRANCH}_XXX
+# Override value with DEP_{BRANCH}_XXX
 for param in ${ALL_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
   eval 'val=${'$branch_param'}'
@@ -169,10 +169,12 @@ done
 # check parameters
 
 for param in ${NECESSARY_PARAMS[@]}; do
+  remote_param='DEP_REMOTE_'$param
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
-  eval 'val=${'$branch_param'}'
+  loaded_param='DEP_'$param
+  eval 'val=${'$loaded_param'}'
   if [ ! $val ]; then
-    log '- ERROR -> Not defined necessary parameter: '$branch_param
+    log '- ERROR -> Not defined necessary parameter: '$remote_param' or '$branch_param
     exit 1
   fi
 done
