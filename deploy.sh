@@ -183,9 +183,9 @@ done
 
 log '---------------'
 for param in ${ALL_PARAMS[@]}; do
-  value='DEP_'$param
-  log '-'
-  log $value' : ${'$value'}'
+  param='DEP_'$param
+  eval 'val=${'$param'}'
+  log $param' : ${'$val'}'
 done
 exit 0
 
