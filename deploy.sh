@@ -184,7 +184,7 @@ done
 log '---------------'
 for param in ${ALL_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
-  log 'DEP_'${DRONE_BRANCH^^}'_'$param' : '$branch_param
+  log $branch_param" : $branch_param"
 done
 exit 0
 
