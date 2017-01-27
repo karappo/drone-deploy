@@ -30,7 +30,7 @@ do_sync()
   log "- sync -> Start with $DEP_COMMAND. This could take a while..."
 
   # download defaults if ignore file isn't exists
-  if [ ${DEP_IGNORE_FILE:-isnil} = "isnil" -o ! -f "$DEP_IGNORE_FILE" ]; then
+  if [ "${DEP_IGNORE_FILE:-isnil}" = "isnil" ] || [ ! -f "$DEP_IGNORE_FILE" ]; then
     log "| Downloading default ignore file..."
     sudo wget -O .depignore https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore
     DEP_IGNORE_FILE=$PWD/.depignore
@@ -41,7 +41,7 @@ do_sync()
   if [ "$DEP_COMMAND" = "rsync" ]; then
 
     # ------ install -------
-    if [ `which ssh-askpass` ]; then
+    if [ "$(which ssh-askpass)" ]; then
       log "- ssh-askpass -> installed"
     else
       log "- ssh-askpass -> install"
@@ -49,7 +49,7 @@ do_sync()
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
-      if [ `which sshpass` ]; then
+      if [ "$(which sshpass)" ]; then
         log "- sshpass -> installed"
       else
         log "- sshpass -> install"
@@ -59,13 +59,13 @@ do_sync()
     # ------ /install -------
 
     opt_exclude=''
-    if [ -f $DEP_IGNORE_FILE ]; then
+    if [ -f "$DEP_IGNORE_FILE" ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
       log 'rsync with password'
-      if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+      if sshpass -p "$DEP_PASSWORD" rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER"@"$DEP_HOST":"$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
@@ -73,7 +73,7 @@ do_sync()
       fi
     else
       log 'rsync without password'
-      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+      if rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER"@"$DEP_HOST":"$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
@@ -84,7 +84,7 @@ do_sync()
   else
 
     # ------ install -------
-    if [ `which lftp` ]; then
+    if [ "$(which lftp)" ]; then
       log "- lftp -> installed"
     else
       log "- lftp -> install"
@@ -93,16 +93,16 @@ do_sync()
     # ------ /install -------
 
     opt_exclude=""
-    while read line; do
+    while read -r line; do
       # TODO: allow commentout in the middle of line
 
       if [ "${line:0:1}" = "/" ]; then
         # /xxx/yyy -> xxx/yyy
         opt_exclude="$opt_exclude -X ${line:1}"
-      elif [ "${line:0:1}" != "#" -a "$line" != "" ]; then
+      elif [ "${line:0:1}" != "#" ] && [ "$line" != "" ]; then
         opt_exclude="$opt_exclude -X $line"
       fi
-    done<$DEP_IGNORE_FILE
+    done<"$DEP_IGNORE_FILE"
 
     opt_setting=""
     if [ "$DEP_FTPS" = "no" ]; then
@@ -114,7 +114,7 @@ do_sync()
       opt_setting="set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-allow yes;set ftp:ssl-protect-list yes;set ftp:ssl-protect-data yes;set ftp:ssl-protect-fxp yes;"
     fi
 
-    if lftp -u $DEP_USER,$DEP_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" $DEP_HOST; then
+    if lftp -u "$DEP_USER,$DEP_PASSWORD -e $opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit $DEP_HOST"; then
       log "- sync -> done."
     else
       log "- sync -> [ERROR]"
@@ -148,33 +148,33 @@ NECESSARY_PARAMS=(HOST USER HOST_DIR)
 DEP_COMMAND=lftp
 
 # Load default value from DEP_REMOTE_XXX
-for param in ${ALL_PARAMS[@]}; do
+for param in "${ALL_PARAMS[@]}"; do
   branch_param='DEP_REMOTE_'$param
-  eval 'val=${'$branch_param'}'
-  if [ $val ]; then
-    eval 'DEP_'$param'='$val
+  eval 'val=${'"$branch_param"'}'
+  if [ "$(val)" ]; then
+    eval "DEP_$param=$(val)"
   fi
 done
 
 # Override value with DEP_{BRANCH}_XXX
-for param in ${ALL_PARAMS[@]}; do
+for param in "${ALL_PARAMS[@]}"; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
-  eval 'val=${'$branch_param'}'
-  if [ $val ]; then
-    eval 'DEP_'$param'='$val
+  eval 'val=${'"$branch_param"'}'
+  if [ "$(val)" ]; then
+    eval "DEP_$param=$(val)"
   fi
 done
 
 # ----------------
 # check parameters
 
-for param in ${NECESSARY_PARAMS[@]}; do
+for param in "${NECESSARY_PARAMS[@]}"; do
   remote_param='DEP_REMOTE_'$param
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
   loaded_param='DEP_'$param
-  eval 'val=${'$loaded_param'}'
-  if [ ! $val ]; then
-    log '- ERROR -> Not defined necessary parameter: '$remote_param' or '$branch_param
+  eval 'val=${'"$loaded_param"'}'
+  if [ ! "$(val)" ]; then
+    log "- ERROR -> Not defined necessary parameter: $remote_param or $branch_param"
     exit 1
   fi
 done
@@ -182,9 +182,9 @@ done
 # ----------------
 
 log '---------------'
-for param in ${ALL_PARAMS[@]}; do
+for param in "${ALL_PARAMS[@]}"; do
   param='DEP_'$param
-  eval 'val=${'$param'}'
+  eval 'val=${'"$param"'}'
   log $param' : ${'$val'}'
 done
 exit 0
@@ -192,7 +192,7 @@ exit 0
 # ----------------
 # main
 
-if [ "$DEP_COMMAND" = "rsync" -a "${DEP_HOST_DIR:0:1}" != "/" ]; then
+if [ "$DEP_COMMAND" = "rsync" ] && [ "${DEP_HOST_DIR:0:1}" != "/" ]; then
   log "- ERROR -> DEP_HOST_DIR must be absolute path: $DEP_HOST_DIR"
   exit 1
 fi
@@ -201,18 +201,18 @@ fi
 
 # from web
 if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
-  if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" -o "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
+  if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" ] || [ "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
     log "| Downloading include file..."
-    sudo wget -O .depinc.sh $DEP_INCLUDE_FILE
+    sudo wget -O .depinc.sh "$DEP_INCLUDE_FILE"
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
   fi
 fi
 
-if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
+if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" ] || [ ! -f "$DEP_INCLUDE_FILE" ]; then
   log "- include file -> Detect failed..."
 else
   log "- include file -> Detect : $DEP_INCLUDE_FILE"
-  source $DEP_INCLUDE_FILE
+  source "$DEP_INCLUDE_FILE"
 fi
 
 do_sync
