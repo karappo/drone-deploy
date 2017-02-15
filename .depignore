@@ -27,6 +27,7 @@ yarn.lock
 
 # for Wordpress
 /wp/wp-content/uploads/
+/wp-content/uploads/
 
 # [ NOTICE ]
 # Comment must start with "#" but any other charactors
