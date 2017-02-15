@@ -2,6 +2,7 @@
 .sass-cache/
 /_assets/
 .gitignore
+.gitmodules
 Procfile
 Gruntfile.*
 gulpfile.*
@@ -11,6 +12,7 @@ README.*
 .ruby-version
 Gemfile
 Gemfile.lock
+yarn.lock
 
 # drone-deploy
 .depignore
