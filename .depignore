@@ -1,6 +1,7 @@
 .git/
 .sass-cache/
 /_assets/
+.gitattributes
 .gitignore
 .gitmodules
 Procfile
