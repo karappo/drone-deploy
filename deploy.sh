@@ -73,7 +73,7 @@ do_sync()
       fi
     else
       log 'rsync without password'
-      if rsync -aIzhv --stats --delete -e "ssh -p 2222 $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
