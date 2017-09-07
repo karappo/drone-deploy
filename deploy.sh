@@ -40,6 +40,9 @@ do_sync()
 
   if [ "$DEP_COMMAND" = "rsync" ]; then
 
+    # ------
+    # rsync
+
     opt_exclude=''
     if [ -f "$DEP_IGNORE_FILE" ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
@@ -64,6 +67,9 @@ do_sync()
     fi
 
   else
+
+    # ------
+    # lftp
 
     opt_exclude=""
     while read line; do
