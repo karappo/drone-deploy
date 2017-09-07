@@ -53,8 +53,9 @@ git cloneする時の引数を指定できます。`depth: 1`にしておくと�
 | 環境変数                    | 値                   | 説明                                      |
 |:------------------------- |:-------------------- |:---------------------------------------- |
 | DEP_[BRANCH]_COMMAND      | `lftp`または`rsync`   | 同期コマンド（デフォルトは`lftp`）              |
-| DEP_[BRANCH]_FTPS         | `no`                 | リモート側がFTPS接続未対応の場合のみ`no`を指定  |
+| DEP_[BRANCH]_FTPS         | `no`                 | リモート側がFTPS接続未対応の場合のみ`no`を指定    |
 | DEP_[BRANCH]_HOST         | 例：`ftp.sample.com`  | ***[required]*** 同期先リモートホストのアドレス |
+| DEP_[BRANCH]_PORT         | 例：`2222`            | `DEP_COMMAND`が`rsync`の場合のみ有効。ポートが22でない場合に使用  |
 | DEP_[BRANCH]_USER         |                      | ***[required]*** FTPまたはSSHのユーザ名      |
 | DEP_[BRANCH]_PASSWORD     |                      | ***(required)*** FTPまたはSSHのパスワード 同期コマンドがrsyncかつ公開鍵で認証する場合は不要です |
 | DEP_[BRANCH]_HOST_DIR     | 例：`www`             | ***[required]*** 同期先リモートホストの展開先 同期コマンドがrsyncの場合は絶対パスになります |

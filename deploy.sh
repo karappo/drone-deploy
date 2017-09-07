@@ -58,7 +58,14 @@ do_sync()
       fi
     else
       log 'rsync without password'
-      if rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+
+
+      opt_port=''
+      if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
+        opt_port="-p $DEP_PORT"
+      fi
+
+      if rsync -aIzhv --stats --delete -e ssh "$opt_exclude $opt_port" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
