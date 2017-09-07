@@ -61,14 +61,14 @@ do_sync()
 
       opt_port=''
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
-        opt_port=" -e 'ssh -p $DEP_PORT'"
+        opt_port=" -e 'ssh -p $DEP_PORT' "
       fi
       echo "----------"
       echo ""
       echo "$opt_exclude$opt_port"
       echo "----"
 
-      if rsync -aIzhv --stats --delete "$opt_exclude$opt_port" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      if rsync -aIzhv --stats --delete "$opt_exclude$opt_port". "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
