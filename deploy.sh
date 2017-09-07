@@ -67,7 +67,7 @@ do_sync()
       echo "$opt_port" "$opt_exclude"
       echo "----"
 
-      if rsync -aIzhv --stats --delete "$opt_port" "$opt_exclude". "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      if rsync -aIzhv --stats --delete "$opt_port" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
