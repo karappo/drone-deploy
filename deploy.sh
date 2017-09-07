@@ -59,13 +59,13 @@ do_sync()
     # ------ /install -------
 
     opt_exclude=''
-    if [ -f $DEP_IGNORE_FILE ]; then
+    if [ -f "$DEP_IGNORE_FILE" ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
       log 'rsync with password'
-      if sshpass -p $DEP_PASSWORD rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+      if sshpass -p "$DEP_PASSWORD" rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
@@ -73,7 +73,7 @@ do_sync()
       fi
     else
       log 'rsync without password'
-      if rsync -aIzhv --stats --delete -e ssh $opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR; then
+      if rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
@@ -114,7 +114,7 @@ do_sync()
       opt_setting="set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-allow yes;set ftp:ssl-protect-list yes;set ftp:ssl-protect-data yes;set ftp:ssl-protect-fxp yes;"
     fi
 
-    if lftp -u $DEP_USER,$DEP_PASSWORD -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" $DEP_HOST; then
+    if lftp -u "$DEP_USER,$DEP_PASSWORD" -e "$opt_setting;pwd;mirror -evR --parallel=10 $opt_exclude ./ $DEP_HOST_DIR;exit" "$DEP_HOST"; then
       log "- sync -> done."
     else
       log "- sync -> [ERROR]"
@@ -192,7 +192,7 @@ if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
   log "- include file -> Detect failed..."
 else
   log "- include file -> Detect : $DEP_INCLUDE_FILE"
-  source $DEP_INCLUDE_FILE
+  source "$DEP_INCLUDE_FILE"
 fi
 
 do_sync
