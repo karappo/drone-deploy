@@ -40,24 +40,6 @@ do_sync()
 
   if [ "$DEP_COMMAND" = "rsync" ]; then
 
-    # ------ install -------
-    if [ `which ssh-askpass` ]; then
-      log "- ssh-askpass -> installed"
-    else
-      log "- ssh-askpass -> install"
-      sudo apt-get install ssh-askpass
-    fi
-
-    if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
-      if [ `which sshpass` ]; then
-        log "- sshpass -> installed"
-      else
-        log "- sshpass -> install"
-        sudo apt-get install sshpass
-      fi
-    fi
-    # ------ /install -------
-
     opt_exclude=''
     if [ -f "$DEP_IGNORE_FILE" ]; then
       opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
@@ -82,15 +64,6 @@ do_sync()
     fi
 
   else
-
-    # ------ install -------
-    if [ `which lftp` ]; then
-      log "- lftp -> installed"
-    else
-      log "- lftp -> install"
-      sudo apt-get install lftp
-    fi
-    # ------ /install -------
 
     opt_exclude=""
     while read line; do
@@ -192,7 +165,7 @@ if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
   log "- include file -> Detect failed..."
 else
   log "- include file -> Detect : $DEP_INCLUDE_FILE"
-  source "$DEP_INCLUDE_FILE"
+  source $DEP_INCLUDE_FILE
 fi
 
 do_sync
