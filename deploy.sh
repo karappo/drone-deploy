@@ -61,7 +61,7 @@ do_sync()
 
       opt_port=''
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
-        opt_port="-e ssh '-p $DEP_PORT' "
+        opt_port=" -e ssh '-p $DEP_PORT'"
       fi
       echo "----------"
       echo ""
