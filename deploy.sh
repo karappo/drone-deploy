@@ -64,10 +64,10 @@ do_sync()
         opt_port="--rsh=ssh -p $DEP_PORT "
       fi
       echo '--------'
-      echo "rsync -aIzhv --stats --delete $opt_port$opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"
+      echo "rsync -aIzhv --stats --delete $opt_port$opt_exclude ./ $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"
       echo '--------'
 
-      if rsync -aIzhv --stats --delete "$opt_port$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      if rsync -aIzhv --stats --delete "$opt_port$opt_exclude" ./ "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
