@@ -64,7 +64,7 @@ do_sync()
         opt_port="-e 'ssh -p $DEP_PORT'"
       fi
       echo "----------"
-      echo ssh -h
+      echo "$opt_port"
       echo "----"
 
       if rsync -aIzhv --stats --delete "$opt_port" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
