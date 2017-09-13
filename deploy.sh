@@ -45,7 +45,7 @@ do_sync()
 
     opt_exclude=''
     if [ -f "$DEP_IGNORE_FILE" ]; then
-      opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
+      opt_exclude="--exclude-from='$DEP_IGNORE_FILE'"
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
