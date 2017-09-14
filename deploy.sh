@@ -141,10 +141,10 @@ for param in ${NECESSARY_PARAMS[@]}; do
   remote_param="DEP_REMOTE_$param"
   eval 'val=${'$branch_param'}'
   if [ ! $val ]; then
-    eval 'val=${'$branch_param'}'
+    eval 'val=${'$remote_param'}'
   fi
   if [ ! $val ]; then
-    log "- ERROR -> Not defined necessary parameter: $branch_param"
+    log "- ERROR -> Not defined necessary parameter: $branch_param or $remote_param"
     exit 1
   fi
 done
