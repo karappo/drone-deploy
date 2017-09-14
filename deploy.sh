@@ -59,6 +59,9 @@ do_sync()
     else
       log '- rsync without password'
 
+      # MEMO
+      # 下記の場合わけで差分は'-e "ssh -p $DEP_PORT"'の部分だけだが、事前に文字列にして変数に入れて実行時に展開するやり方（$opt_excludeのような）だと、うまく動かなかった。
+      # 変数展開したときにクォート系がちゃんと処理されていない？とにかく、どうしようもないので、実行部分を２つに分けた。
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
         # Specific port
         log "- rsync port: $DEP_PORT"
@@ -70,7 +73,7 @@ do_sync()
         fi
       else
         # Default port
-        log '- rsync default port 2'
+        log '- rsync default port'
         if rsync -aIzhv --stats --delete "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
           log "- sync -> done."
         else
