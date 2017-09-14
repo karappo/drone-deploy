@@ -137,10 +137,14 @@ ALL_PARAMS=(COMMAND FTPS PORT HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FI
 NECESSARY_PARAMS=(HOST USER HOST_DIR)
 
 for param in ${NECESSARY_PARAMS[@]}; do
-  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  branch_param="DEP_${DRONE_BRANCH^^}_$param"
+  remote_param="DEP_REMOTE_$param"
   eval 'val=${'$branch_param'}'
   if [ ! $val ]; then
-    log '- ERROR -> Not defined necessary parameter: '$branch_param
+    eval 'val=${'$branch_param'}'
+  fi
+  if [ ! $val ]; then
+    log "- ERROR -> Not defined necessary parameter: $branch_param"
     exit 1
   fi
 done
@@ -150,8 +154,8 @@ done
 # e.g. DEP_COMMAND=${DEP_MASTER_COMMAND}
 
 for param in ${ALL_PARAMS[@]}; do
-  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
-  remote_param='DEP_REMOTE_'$param
+  branch_param="DEP_${DRONE_BRANCH^^}_$param"
+  remote_param="DEP_REMOTE_$param"
   eval 'val=${'$branch_param'}'
   if [ $val ]; then
     eval "DEP_$param=$val"
