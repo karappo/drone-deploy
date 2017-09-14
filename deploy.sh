@@ -188,7 +188,7 @@ if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
   log "- include file -> Detect failed..."
 else
   log "- include file -> Detect : $DEP_INCLUDE_FILE"
-  source $DEP_INCLUDE_FILE
+  source "$DEP_INCLUDE_FILE"
 fi
 
 do_sync
