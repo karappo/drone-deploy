@@ -62,6 +62,10 @@ git cloneする時の引数を指定できます。`depth: 1`にしておくと�
 | DEP_[BRANCH]_INCLUDE_FILE | 例：`./.depinc.sh`    | URLでも指定可能 → [詳細](#include-file) |
 | DEP_[BRANCH]_IGNORE_FILE  | 例：`./.depignore`    | URLでも指定可能 → [詳細](#ignore-file) [デフォルト](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) |
 
+##### DEP_REMOTE_XXX
+
+`DEP_[BRANCH]_XXX`が見つからない場合、`DEP_REMOTE_XXX`を探し見つかればその値を使います。ブランチ間で共通する値がある場合などは、`REMOTE`を活用してください。
+
 ##### commands
 
 ここがシステムの起点になっています。必ず、この通りに記述して下さい。
