@@ -108,8 +108,8 @@ build:
 
 上記のファイルを指定すると、同期の前段階で下記の処理が実行されます。[詳しくはこちら](https://github.com/karappo/drone-deploy/blob/master/include-files/php/.depinc.sh)
 
-1. `.htaccess`ファイル内の`#RM_SYNC_REMOTE ` `#RM_SYNC_[BRANCH] `を削除
-2. phpファイル内の`//RM_SYNC_REMOTE ` `//RM_SYNC_[BRANCH] `を削除
+1. `.htaccess`ファイル内の`#DEP_REMOTE_RM ` `#DEP_[BRANCH]_RM `を削除
+2. phpファイル内の`//DEP_REMOTE_RM ` `//DEP_[BRANCH]_RM `を削除
 
 例えば、Wordpressを使ったプロジェクトで下記の様に記述することができます。
 
