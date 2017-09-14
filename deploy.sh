@@ -151,9 +151,15 @@ done
 
 for param in ${ALL_PARAMS[@]}; do
   branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  remote_param='DEP_REMOTE_'$param
   eval 'val=${'$branch_param'}'
   if [ $val ]; then
-    eval 'DEP_'$param'='$val
+    eval "DEP_$param=$val"
+  else
+    eval 'val=${'$remote_param'}'
+    if [ $val ]; then
+      eval "DEP_$param=$val"
+    fi
   fi
 done
 
