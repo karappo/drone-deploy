@@ -45,7 +45,7 @@ do_sync()
 
     opt_exclude=''
     if [ -f "$DEP_IGNORE_FILE" ]; then
-      opt_exclude="--exclude-from=$DEP_IGNORE_FILE"
+      opt_exclude="--exclude-from=.depignore"
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
@@ -61,15 +61,16 @@ do_sync()
 
       opt_port=''
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
-        opt_port="-e \"ssh -p $DEP_PORT\" "
+        opt_port="-e 'ssh -p $DEP_PORT' "
       fi
-      echo '--------[JUST TEXT]'
+      echo '--------[OK?]'
       echo "rsync -aIzhv --stats --delete $opt_port$opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"
+      echo 'This is passed !'
       echo "rsync -aIzhv --stats --delete -e 'ssh -p 2222' --exclude-from=.depignore . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"
       echo '--------'
 
-      # if rsync -aIzhv --stats --delete "$opt_port$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
-      if rsync -aIzhv --stats --delete -e 'ssh -p 2222' --exclude-from=.depignore . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      if rsync -aIzhv --stats --delete "$opt_port$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      # if rsync -aIzhv --stats --delete -e 'ssh -p 2222' --exclude-from=.depignore . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
