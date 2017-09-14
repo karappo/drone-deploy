@@ -49,7 +49,7 @@ do_sync()
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
-      log 'rsync with password'
+      log '- rsync with password'
       if sshpass -p "$DEP_PASSWORD" rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
@@ -57,25 +57,26 @@ do_sync()
         exit 1
       fi
     else
-      log 'rsync without password'
+      log '- rsync without password'
 
-      opt_port=''
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
-        opt_port="-e \'ssh -p $DEP_PORT\' "
-      fi
-      echo '--------[OK?4]'
-      echo "rsync -aIzhv --stats --delete $opt_port$opt_exclude . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"
-      echo 'This is passed !'
-      echo "rsync -aIzhv --stats --delete -e 'ssh -p 2222' --exclude-from=.depignore . $DEP_USER@$DEP_HOST:$DEP_HOST_DIR"
-      echo '--------'
-
-      # this is also OK
-      if rsync -aIzhv --stats --delete -e "ssh -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
-      # if rsync -aIzhv --stats --delete -e 'ssh -p 2222' --exclude-from=.depignore . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
-        log "- sync -> done."
+        # Specific port
+        log "- rsync port: $DEP_PORT"
+        if rsync -aIzhv --stats --delete -e "ssh -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+          log "- sync -> done."
+        else
+          log "- sync -> [ERROR]"
+          exit 1
+        fi
       else
-        log "- sync -> [ERROR]"
-        exit 1
+        # Default port
+        log '- rsync default port'
+        if rsync -aIzhv --stats --delete -e "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+          log "- sync -> done."
+        else
+          log "- sync -> [ERROR]"
+          exit 1
+        fi
       fi
     fi
 
