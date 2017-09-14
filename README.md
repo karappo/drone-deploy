@@ -139,11 +139,11 @@ define('DB_HOST', 'localhost');
 //DEP_MASTER_RM define('DB_PASSWORD', 'PROD_PASSWORD');
 //DEP_MASTER_RM define('DB_HOST', 'PROD_HOST');
 
-// testブランチのデプロイ先でのみ有効
-//DEP_TEST_RM define('DB_NAME', 'TEST_DATABASE');
-//DEP_TEST_RM define('DB_USER', 'TEST_USER');
-//DEP_TEST_RM define('DB_PASSWORD', 'TEST_PASSWORD');
-//DEP_TEST_RM define('DB_HOST', 'TEST_HOST');
+// stagingブランチのデプロイ先でのみ有効
+//DEP_STAGING_RM define('DB_NAME', 'STAGING_DATABASE');
+//DEP_STAGING_RM define('DB_USER', 'STAGING_USER');
+//DEP_STAGING_RM define('DB_PASSWORD', 'STAGING_PASSWORD');
+//DEP_STAGING_RM define('DB_HOST', 'STAGING_HOST');
 
 // Common
 
@@ -153,20 +153,20 @@ define('DB_COLLATE', '');
 // -----------　/ Database Settings
 ```
 
-下記のように記述しておけば、testブランチの同期先のみBASIC認証をかけられます。
+下記のように記述しておけば、stagingブランチの同期先のみBASIC認証をかけられます。
 
 .htaccess
 ```sh
 # Basic Authentication -----------
-#DEP_TEST_RM <Files ~ "^\.(htaccess|htpasswd)$">
-#DEP_TEST_RM deny from all
-#DEP_TEST_RM </Files>
-#DEP_TEST_RM AuthUserFile /home/example/www/.htpasswd
-#DEP_TEST_RM AuthGroupFile /dev/null
-#DEP_TEST_RM AuthName "Please enter your ID and password"
-#DEP_TEST_RM AuthType Basic
-#DEP_TEST_RM require valid-user
-#DEP_TEST_RM order deny,allow
+#DEP_STAGING_RM <Files ~ "^\.(htaccess|htpasswd)$">
+#DEP_STAGING_RM deny from all
+#DEP_STAGING_RM </Files>
+#DEP_STAGING_RM AuthUserFile /home/example/www/.htpasswd
+#DEP_STAGING_RM AuthGroupFile /dev/null
+#DEP_STAGING_RM AuthName "Please enter your ID and password"
+#DEP_STAGING_RM AuthType Basic
+#DEP_STAGING_RM require valid-user
+#DEP_STAGING_RM order deny,allow
 # ----------- / Basic Authentication
 ```
 
