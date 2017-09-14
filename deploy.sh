@@ -70,7 +70,7 @@ do_sync()
         fi
       else
         # Default port
-        log '- rsync default port'
+        log '- rsync default port 2'
         if rsync -aIzhv --stats --delete "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
           log "- sync -> done."
         else
