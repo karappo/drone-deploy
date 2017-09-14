@@ -49,7 +49,7 @@ do_sync()
     fi
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
-      log 'rsync with password'
+      log '- rsync with password'
       if sshpass -p "$DEP_PASSWORD" rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
@@ -57,12 +57,29 @@ do_sync()
         exit 1
       fi
     else
-      log 'rsync without password'
-      if rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
-        log "- sync -> done."
+      log '- rsync without password'
+
+      # MEMO
+      # 下記の場合わけで差分は'-e "ssh -p $DEP_PORT"'の部分だけだが、事前に文字列にして変数に入れて実行時に展開するやり方（$opt_excludeのような）だと、うまく動かなかった。
+      # 変数展開したときにクォート系がちゃんと処理されていない？とにかく、どうしようもないので、実行部分を２つに分けた。
+      if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
+        # Specific port
+        log "- rsync port: $DEP_PORT"
+        if rsync -aIzhv --stats --delete -e "ssh -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+          log "- sync -> done."
+        else
+          log "- sync -> [ERROR]"
+          exit 1
+        fi
       else
-        log "- sync -> [ERROR]"
-        exit 1
+        # Default port
+        log '- rsync default port'
+        if rsync -aIzhv --stats --delete "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+          log "- sync -> done."
+        else
+          log "- sync -> [ERROR]"
+          exit 1
+        fi
       fi
     fi
 
@@ -116,7 +133,7 @@ do_sync()
 # ----------------
 # check parameters
 
-ALL_PARAMS=(COMMAND FTPS HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
+ALL_PARAMS=(COMMAND FTPS PORT HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
 NECESSARY_PARAMS=(HOST USER HOST_DIR)
 
 for param in ${NECESSARY_PARAMS[@]}; do
