@@ -137,10 +137,14 @@ ALL_PARAMS=(COMMAND FTPS PORT HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FI
 NECESSARY_PARAMS=(HOST USER HOST_DIR)
 
 for param in ${NECESSARY_PARAMS[@]}; do
-  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  branch_param="DEP_${DRONE_BRANCH^^}_$param"
+  remote_param="DEP_REMOTE_$param"
   eval 'val=${'$branch_param'}'
   if [ ! $val ]; then
-    log '- ERROR -> Not defined necessary parameter: '$branch_param
+    eval 'val=${'$remote_param'}'
+  fi
+  if [ ! $val ]; then
+    log "- ERROR -> Not defined necessary parameter: $branch_param or $remote_param"
     exit 1
   fi
 done
@@ -150,10 +154,16 @@ done
 # e.g. DEP_COMMAND=${DEP_MASTER_COMMAND}
 
 for param in ${ALL_PARAMS[@]}; do
-  branch_param='DEP_'${DRONE_BRANCH^^}'_'$param
+  branch_param="DEP_${DRONE_BRANCH^^}_$param"
+  remote_param="DEP_REMOTE_$param"
   eval 'val=${'$branch_param'}'
   if [ $val ]; then
-    eval 'DEP_'$param'='$val
+    eval "DEP_$param=$val"
+  else
+    eval 'val=${'$remote_param'}'
+    if [ $val ]; then
+      eval "DEP_$param=$val"
+    fi
   fi
 done
 
@@ -188,7 +198,7 @@ if [ "${DEP_INCLUDE_FILE:-isnil}" = "isnil" -o ! -f "$DEP_INCLUDE_FILE" ]; then
   log "- include file -> Detect failed..."
 else
   log "- include file -> Detect : $DEP_INCLUDE_FILE"
-  source $DEP_INCLUDE_FILE
+  source "$DEP_INCLUDE_FILE"
 fi
 
 do_sync
