@@ -8,6 +8,7 @@ Procfile
 Gruntfile.*
 gulpfile.*
 package.json
+package-lock.json
 README
 README.*
 .ruby-version
