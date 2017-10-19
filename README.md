@@ -1,20 +1,38 @@
-# Drone deploy
+# drone-deploy
 
-[Drone 0.4x](https://github.com/drone/drone)を使った、deployを便利にするスクリプト集です。
-使い方を知りたい方は、[For Users](#forusers)を、自分の環境に移植したい方は[For Developpers](#fordeveloppers)を御覧ください。
+[Drone CI](https://github.com/drone/drone)を利用し、build時に読み込むことで、デプロイ作業を便利にするスクリプトです。
+
+## Features
+
+drone-deployの主な機能、実現できることは下記のようなものになります。
+
+- rsyncまたはlftpを使ったファイルのアップロード
+- アップロード前に、環境毎にソースコードを自動編集
+- 公開済みのソースとリポジトリの一致を補償する
+
+## Dependency
+
+自分の環境に移植したい方は[INSTALLATION.md](https://github.com/karappo/drone-deploy/blob/master/INSTALLATION.md)を御覧ください。
+
+## Drone compatibles
+
+Droneはバージョンによって`.drone.yml`ファイルのフォーマットが変わっている場合があります。特定のバージョンのdroneで動作させたい場合は、[この一覧](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)をご確認ください。
+
 
 # For Users
+
+![](./img/how-works.png)
 
 ## 使い方
 
 1. drone.ioに、deployの対象プロジェクトを追加
 2. 対象プロジェクトのルートに`.drone.yml`ファイルを追加 → [詳細](#droneyml)
-3. 対象プロジェクトにcommitしてpush
-
+3. 必要に応じて[include file](#include-file)や[ignore file](#ignore-file)を追加
+4. 対象プロジェクトにcommitしてpush
 
 ## .drone.yml
 
-最低限、下記の様な内容が必要です。必要に応じて[include file](#include-file)や[ignore file](#ignore-file)を追加しましょう。
+最低限、下記の様な内容が必要です。
 
 .drone.yml
 ```yml
@@ -221,10 +239,3 @@ ftp://user:password@host.com
 mirror: Fatal error: Certificate verification: Not trusted
 [DEPLOY] - sync -> [ERROR]
 ```
-
-
-# For Developpers
-
-このスクリプト集は、droneが提供する[Deployments](https://github.com/drone/drone#deployments)トリガーの中でGithub上にホストされた`deploy.sh`を読み込むことで動作します。
-***プロジェクト内のスクリプトの仕様が変わると意図した動作をしないことがあるので、利用する場合はforkして、各読込先を変更してください。***
-変更が必要な箇所は[こちら](https://github.com/karappo/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2Fkarappo%2Fdrone-deploy)で確認して下さい。
