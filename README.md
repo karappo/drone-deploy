@@ -247,7 +247,7 @@ mirror: Fatal error: Certificate verification: Not trusted
 
 ### Disable deployment on particular timing
 
-Yes, you can skip deployment with `[skip ci]` in your last commit comment. Ammend your last commit or just add empty commit and push.
+You can skip deployment with `[skip ci]` in your last commit comment. Ammend your last commit or just add empty commit and push.
 
 ```sh
 git commit --allow-empty -m '[skip ci]'
