@@ -38,6 +38,7 @@ _[This branch list shows drone compatibles.](https://github.com/karappo/drone-de
 The following contents are recommended.
 
 .drone.yml
+
 ```yml
 clone:
   depth: 1
@@ -110,6 +111,7 @@ You can define custom processes before and after syncing in this file.
 Include file should have two methods like this.
 
 .depinc.sh
+
 ```sh
 before_sync(){
   # process you want to do before syncing
@@ -122,6 +124,7 @@ after_sync(){
 You should set your include file with related path from your project's root.
 
 .drone.yml
+
 ```yml
 build:
   environment:
@@ -131,6 +134,7 @@ build:
 Or you can set this as URL.
 
 .drone.yml
+
 ```yml
 build:
   environment:
@@ -148,6 +152,7 @@ Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/master/include-fi
 In WordPress project, you can write code like this.
 
 wp-config.php
+
 ```php
 // Database Settings　-----------
 
@@ -186,6 +191,7 @@ define('DB_COLLATE', '');
 And you can activate Basic Auth only in staging branch's target environment with this below.
 
 .htaccess
+
 ```sh
 # Basic Authentication -----------
 #DEP_STAGING_RM <Files ~ "^\.(htaccess|htpasswd)$">
@@ -208,6 +214,7 @@ This is a file for exclusion in syncing.
 ### Example
 
 .depignore
+
 ```sh
 .git/
 .sass-cache/
@@ -226,6 +233,7 @@ README.*
 You should set your ignore file with related path from your project's root.
 
 .drone.yml
+
 ```yml
 build:
   environment:
