@@ -88,7 +88,7 @@ It's useful if you have some common settings between remote environments.
 |:----------------------- |:--------------------  |:-------------------- |
 | `DEP_[BRANCH]_HOST`     | e.g. `ftp.sample.com` | Target remote host   |
 | `DEP_[BRANCH]_USER`     |                       | FTP or SSH username  |
-| `DEP_[BRANCH]_PASSWORD` |                       | Not Necessary if command is rsync(without password) |
+| `DEP_[BRANCH]_PASSWORD` |                       | Not Necessary if command is rsync without password |
 | `DEP_[BRANCH]_HOST_DIR` | e.g. `www`(lftp)      | Set **absolute path** if command is rsync |
 
 **Optional**
