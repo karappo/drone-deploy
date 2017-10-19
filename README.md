@@ -9,7 +9,7 @@ _Compatible: Drone v0.4_
 ## Features
 
 - Uploading files with rsync or lftp
-- Auto editing in each environments before uploading (Ref: [include file](#include-file))
+- [Auto editing in each environments before uploading](#include-file)
 
 ## Setup
 
@@ -82,12 +82,12 @@ It's useful if you have some common settings between remote environments.
 
 **Optional**
 
-| Key                         | Value                      | Description                                 |
-|:--------------------------- |:-------------------------- |:------------------------------------------- |
-| `DEP_[BRANCH]_COMMAND`      | `lftp`(default) or `rsync` | Command                                     |
-| `DEP_[BRANCH]_FTPS`         | `no`                       | Set `no` only if remote doesn't accept FTPS |
-| `DEP_[BRANCH]_PORT`         | default: `22`              | Activate only if command is rsync           |
-| `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh`        | [URL allowed](#include-file)                |
+| Key                         | Value                      | Description                                            |
+|:--------------------------- |:-------------------------- |:------------------------------------------------------ |
+| `DEP_[BRANCH]_COMMAND`      | `lftp`(default) or `rsync` | Command                                                |
+| `DEP_[BRANCH]_FTPS`         | `no`                       | [Set `no` only if remote doesn't accept FTPS](#errors) |
+| `DEP_[BRANCH]_PORT`         | default: `22`              | Activate only if command is rsync                      |
+| `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh`        | [URL allowed](#include-file)                           |
 | `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) | [URL allowed](#ignore-file) |
 
 ##### build.commands \[required\]
