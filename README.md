@@ -1,6 +1,8 @@
 # drone-deploy
 
-This is a useful scripts collection for deploying with Drone CI.
+This is a useful scripts collection for deploying with [Drone CI](https://github.com/drone/drone).
+
+_Compatible: Drone v0.4_
 
 ![How "drone-deploy" works](./img/how-works.png)
 
@@ -20,9 +22,6 @@ This scripts are triggered by Drone's [Deployments](https://github.com/drone/dro
 Please install following [this instruction](http://readme.drone.io/0.4/setup/overview/).
 
 Ref: [Easily install Drone on Digital Ocean (Japanese)](https://qiita.com/naokazuterada/items/d040ad27e77b587ef49f)
-
-**[NOTICE]**
-Drone compatible: v0.4
 
 _[This branch list shows drone compatibles.](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)_
 
