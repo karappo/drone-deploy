@@ -247,7 +247,7 @@ build:
 
 If you got these errors, your remote server may not accept FTPS connection. Please set `DEP_[BRANCH]_FTPS=no`.
 
-```
+```sh
 [DEPLOY] - sync -> via FTPS
 ftp://user:password@host.com
 mirror: Fatal error: Certificate verification: Not trusted
