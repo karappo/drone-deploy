@@ -163,13 +163,13 @@ define('DB_HOST', 'localhost');
 
 // Remote
 
-// Activate only in master branch's deployment target
+// Activate only in master branch's deploy target
 //DEP_MASTER_RM define('DB_NAME', 'PROD_DATABASE');
 //DEP_MASTER_RM define('DB_USER', 'PROD_USER');
 //DEP_MASTER_RM define('DB_PASSWORD', 'PROD_PASSWORD');
 //DEP_MASTER_RM define('DB_HOST', 'PROD_HOST');
 
-// Activate only in staging branch's deployment target
+// Activate only in staging branch's deploy target
 //DEP_STAGING_RM define('DB_NAME', 'STAGING_DATABASE');
 //DEP_STAGING_RM define('DB_USER', 'STAGING_USER');
 //DEP_STAGING_RM define('DB_PASSWORD', 'STAGING_PASSWORD');
