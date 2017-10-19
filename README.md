@@ -85,7 +85,7 @@ It's useful if you have some common settings between remote environments.
 | Key                         | Value                      | Description                                            |
 |:--------------------------- |:-------------------------- |:------------------------------------------------------ |
 | `DEP_[BRANCH]_COMMAND`      | `lftp`(default) or `rsync` | Command                                                |
-| `DEP_[BRANCH]_FTPS`         | `no`                       | [Set `no` only if remote doesn't accept FTPS](#errors) |
+| `DEP_[BRANCH]_FTPS`         | `no`                       | [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
 | `DEP_[BRANCH]_PORT`         | default: `22`              | Activate only if command is rsync                      |
 | `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh`        | [URL allowed](#include-file)                           |
 | `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) | [URL allowed](#ignore-file) |
@@ -232,7 +232,9 @@ build:
     - DEP_MASTER_IGNORE_FILE=./.depignore
 ```
 
-## Errors
+## FAQ
+
+### Got `Fatal error: Certificate verification: Not trusted`
 
 If you got these errors, your remote server may not accept FTPS connection. Please set `DEP_[BRANCH]_FTPS=no`.
 
@@ -242,3 +244,13 @@ ftp://user:password@host.com
 mirror: Fatal error: Certificate verification: Not trusted
 [DEPLOY] - sync -> [ERROR]
 ```
+
+### Disable deployment on particular timing
+
+Yes, you can skip deployment with `[skip ci]` in your last commit comment. Ammend your last commit or just add empty commit and push.
+
+```sh
+git commit --allow-empty -m '[skip ci]'
+```
+
+Ref: [Skip Commits on Drone Document](http://docs.drone.io/hooks/#skip-commits)
