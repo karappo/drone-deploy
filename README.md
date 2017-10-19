@@ -1,34 +1,28 @@
 # drone-deploy
 
-[Drone CI](https://github.com/drone/drone)を利用し、build時に読み込むことで、デプロイ作業を便利にするスクリプトです。
+This is a useful scripts collection for deploying with Drone CI.
 
-## Features
+![How "drone-deploy" works](./img/how-works.png)
 
-drone-deployの主な機能、実現できることは下記のようなものになります。
+## Fatures
 
-- rsyncまたはlftpを使ったファイルのアップロード
-- アップロード前に、環境毎にソースコードを自動編集
-- 公開済みのソースとリポジトリの一致を補償する
+- Uploading files with rsync or lftp
+- Auto editing in each environments before uploading (Ref: [include file](#include-file))
 
 ## Dependency
 
-自分の環境に移植したい方は[INSTALLATION.md](https://github.com/karappo/drone-deploy/blob/master/INSTALLATION.md)を御覧ください。
+- [Drone OSS](https://github.com/drone/drone)
+- [GitHub](http://github.com)
 
-## Drone compatibles
+Ref: [INSTALLATION.md](https://github.com/karappo/drone-deploy/blob/master/INSTALLATION.md).
 
-Droneはバージョンによって`.drone.yml`ファイルのフォーマットが変わっている場合があります。特定のバージョンのdroneで動作させたい場合は、[この一覧](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)をご確認ください。
+## Usage
 
-
-# For Users
-
-![](./img/how-works.png)
-
-## 使い方
-
-1. drone.ioに、deployの対象プロジェクトを追加
-2. 対象プロジェクトのルートに`.drone.yml`ファイルを追加 → [詳細](#droneyml)
-3. 必要に応じて[include file](#include-file)や[ignore file](#ignore-file)を追加
-4. 対象プロジェクトにcommitしてpush
+1. [Setup your Drone server](https://github.com/karappo/drone-deploy/blob/master/INSTALLATION.md)
+1. Activate your project on Drone.
+2. [Add `.drone.yml` file into your project root](#droneyml)
+3. [Optional] Add [include file](#include-file) and [ignore file](#ignore-file)
+4. Commit and push as usual
 
 ## .drone.yml
 
