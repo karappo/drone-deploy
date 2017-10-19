@@ -84,7 +84,7 @@ It's useful if you have some common settings between remote environments.
 
 **Required**
 
-| Variable                | Value                 | Description          |
+| Key                     | Value                 | Description          |
 |:----------------------- |:--------------------  |:-------------------- |
 | `DEP_[BRANCH]_HOST`     | e.g. `ftp.sample.com` | Target remote host   |
 | `DEP_[BRANCH]_USER`     |                       | FTP or SSH username  |
@@ -93,7 +93,7 @@ It's useful if you have some common settings between remote environments.
 
 **Optional**
 
-| Variable                    | Value                      | Description                                 |
+| Key                         | Value                      | Description                                 |
 |:--------------------------- |:-------------------------- |:------------------------------------------- |
 | `DEP_[BRANCH]_COMMAND`      | `lftp`(default) or `rsync` | Command                                     |
 | `DEP_[BRANCH]_FTPS`         | `no`                       | Set `no` only if remote doesn't accept FTPS |
