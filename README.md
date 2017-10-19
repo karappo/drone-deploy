@@ -206,6 +206,10 @@ And you can activate Basic Auth only in staging branch's target environment with
 # ----------- / Basic Authentication
 ```
 
+### Prepared include files
+
+There are some files for particular purposes or environments under the directory [`include-files`](https://github.com/karappo/drone-deploy/tree/master/include-files).
+
 
 ## Ignore file
 
