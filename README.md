@@ -114,10 +114,10 @@ Include file should have two methods like this.
 
 ```sh
 before_sync(){
-  # process you want to do before syncing
+  # your process here
 }
 after_sync(){
-  # process you want to do after syncing
+  # your process here
 }
 ```
 
