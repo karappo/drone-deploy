@@ -72,7 +72,7 @@ Replace `[BRANCH]` to your target branch name.
 If `DEP_[BRANCH]_XXX` won't be found, the scripts will use `DEP_REMOTE_XXX` instead.
 It's useful if you have some common settings between remote environments.
 
-**Required**
+###### Required environment variables
 
 | Key                     | Value                 | Description          |
 |:----------------------- |:--------------------  |:-------------------- |
@@ -81,7 +81,7 @@ It's useful if you have some common settings between remote environments.
 | `DEP_[BRANCH]_PASSWORD` |                       | Not Necessary if command is rsync without password |
 | `DEP_[BRANCH]_HOST_DIR` | e.g. `www`(lftp)      | Set **absolute path** if command is rsync |
 
-**Optional**
+###### Optional environment variables
 
 | Key                         | Value                      | Description                                            |
 |:--------------------------- |:-------------------------- |:------------------------------------------------------ |
