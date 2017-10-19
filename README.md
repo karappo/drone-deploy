@@ -253,4 +253,4 @@ Yes, you can skip deployment with `[skip ci]` in your last commit comment. Ammen
 git commit --allow-empty -m '[skip ci]'
 ```
 
-Ref: [Skip Commits on Drone Document](http://docs.drone.io/hooks/#skip-commits)
+Ref: [Skip Commits (Drone Document)](http://docs.drone.io/hooks/#skip-commits)
