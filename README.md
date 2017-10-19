@@ -4,7 +4,7 @@ This is a useful scripts collection for deploying with Drone CI.
 
 ![How "drone-deploy" works](./img/how-works.png)
 
-## Fatures
+## Features
 
 - Uploading files with rsync or lftp
 - Auto editing in each environments before uploading (Ref: [include file](#include-file))
