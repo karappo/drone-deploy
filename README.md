@@ -15,7 +15,7 @@ _Compatible: Drone v0.4_
 
 ### 1. Fork this repository
 
-This scripts are triggered by Drone's [Deployments](https://github.com/drone/drone#deployments). It will get [this file](https://raw.githubusercontent.com/karappo/drone-deploy/update-readme/deploy.sh) hosted on this repository. This means that changes on this repository may affect your deployment immediately. So you shouldn't use this directly, you should fork this at first, then change [these parts](https://github.com/karappo/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2Fkarappo%2Fdrone-deploy) to yours.
+This scripts are triggered by Drone's [Deployments](https://github.com/drone/drone#deployments). It will get [this file](https://raw.githubusercontent.com/karappo/drone-deploy/update-readme/deploy.sh) hosted on this repository. This means that changes on this repository may affect your deployment immediately. So you shouldn't use this directly, you should fork this at first, then change [these parts](https://github.com/karappo/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2Fkarappo%2Fdrone-deploy) to yours. (just replace `karappo/drone-deploy/` to `your-acocunt/drone-deploy/`)
 
 ### 2. Setup Drone
 
