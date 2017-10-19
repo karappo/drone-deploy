@@ -259,10 +259,10 @@ mirror: Fatal error: Certificate verification: Not trusted
 
 ### Disable deployment on particular timing
 
-You can skip deployment with `[skip ci]` in your last commit comment. Ammend your last commit or just add empty commit and push.
+You can skip deployment by adding `[CI SKIP]` to the last commit message. Ammend your last commit or just add empty commit and push. Note this is case-insensitive.
 
 ```sh
-git commit --allow-empty -m '[skip ci]'
+git commit --allow-empty -m '[CI SKIP]'
 ```
 
 Ref: [Skip Commits (Drone Document)](http://docs.drone.io/hooks/#skip-commits)
