@@ -20,19 +20,16 @@ before_sync(){
   fi
   # ==================================
 
-  # backup file's extention
-  # 置換する際に一時的に作成するバックアップファイルの拡張子
+  # extension of backup files which are created before replacement
   ext=".temp_bakup"
 
-  # .htaccess
-  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \; # 「#DEP_REMOTE_RM 」コメントを消去
-  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_${DRONE_BRANCH^^}_RM ||" {} \; # 「#DEP_[BRANCH]_RM 」コメントを消去
+  # remove "DEP_XXX_RM "
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \;
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_${DRONE_BRANCH^^}_RM ||" {} \;
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \;
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \;
 
-  # php
-  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \; #「//DEP_REMOTE_RM 」コメントを消去
-  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
-
-  # バックファイルを削除
+  # delete backup files
   sudo find . -name "*$ext" -exec rm {} \;
 
   return

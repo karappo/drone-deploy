@@ -11,21 +11,18 @@ exit 1
 
 before_sync(){
 
-  # backup file's extention
-  # 置換する際に一時的に作成するバックアップファイルの拡張子
+  # extension of backup files which are created before replacement
   ext=".temp_bakup"
 
   # [TODO]
   # # 不要なファイルの消去
   rm -rf ./core/cache/*
 
-  # .htaccess
-  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \; # 「#DEP_REMOTE_RM 」コメントを消去
-  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \; # 「#RM_SYNC_[BRANCH] 」コメントを消去
-
-  # php
-  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \; #「//DEP_REMOTE_RM 」コメントを消去
-  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \; #「//DEP_[BRANCH]_RM 」コメントを消去
+  # remove "DEP_XXX_RM "
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \;
+  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \;
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \;
+  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \;
 
   # [TODO]
   # ファイルディレクトリをリモート用に変換。「/Users/terada/Sites/example.com」と「/home/remote/example.com」の部分を適宜設定すること
@@ -41,7 +38,7 @@ before_sync(){
   # sudo find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_server = '$DEP_HOST';|database_server = 'localhost';|" {} \;
   # sudo find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_dsn = 'mysql:host=$DEP_HOST;|database_dsn = 'mysql:host=localhost;|" {} \;
 
-  # バックファイルを削除
+  # delete backup files
   sudo find . -name "*$ext" -exec rm {} \;
 
   return

@@ -4,7 +4,6 @@
 # methods
 
 
-# ログ出力の先頭に付加するラベル
 log_label="[DEPLOY] "
 log()
 {
