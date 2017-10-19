@@ -266,3 +266,7 @@ git commit --allow-empty -m '[CI SKIP]'
 ```
 
 Ref: [Skip Commits (Drone Document)](http://docs.drone.io/hooks/#skip-commits)
+
+## License
+
+- **drone-deploy** is licensed under the [MIT License](https://github.com/karappo/drone-deploy/blob/master/LICENSE-MIT)
