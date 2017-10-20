@@ -4,7 +4,7 @@ This is a useful scripts collection for deploying with [Drone CI](https://github
 
 _Compatible: Drone v0.4_
 
-![How "drone-deploy" works](./img/how-works.png)
+![How "drone-deploy" works](./how-drone-deploy-works.png)
 
 ## Features
 
