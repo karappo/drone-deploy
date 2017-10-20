@@ -106,7 +106,7 @@ You can define custom processes before and after syncing in this file.
 - Switch DB settings by each environments
 - Activate Basic Auth only on stating environment
 
-### Usage
+### Include file usage
 
 Include file should have two methods like this.
 
