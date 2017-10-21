@@ -133,7 +133,7 @@ do_sync()
 # check parameters
 
 ALL_PARAMS=(COMMAND FTPS PORT HOST USER PASSWORD HOST_DIR INCLUDE_FILE IGNORE_FILE)
-NECESSARY_PARAMS=(HOST USER HOST_DIR)
+NECESSARY_PARAMS=(COMMAND HOST USER HOST_DIR)
 
 for param in ${NECESSARY_PARAMS[@]}; do
   branch_param="DEP_${DRONE_BRANCH^^}_$param"
@@ -170,8 +170,8 @@ done
 # ----------------
 # default value
 
-if [ "${DEP_COMMAND:-isnil}" = "isnil" ]; then
-  DEP_COMMAND=lftp
+if [ "${DEP_FTPS:-isnil}" = "isnil" ]; then
+  DEP_FTPS=yes
 fi
 
 # ----------------
