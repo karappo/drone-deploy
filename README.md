@@ -76,17 +76,17 @@ It's useful if you have some common settings between remote environments.
 
 | Key                     | Value                 | Description          |
 |:----------------------- |:--------------------  |:-------------------- |
+| `DEP_[BRANCH]_COMMAND`  | `rsync` or `lftp`     | Sync command (`rsync` is recommended) |
 | `DEP_[BRANCH]_HOST`     | e.g. `ftp.sample.com` | Target remote host   |
-| `DEP_[BRANCH]_USER`     |                       | FTP or SSH username  |
-| `DEP_[BRANCH]_PASSWORD` |                       | Not Necessary if command is rsync without password |
-| `DEP_[BRANCH]_HOST_DIR` | e.g. `www`(lftp)      | Set **absolute path** if command is rsync |
+| `DEP_[BRANCH]_USER`     |                       | SSH or FTP username  |
+| `DEP_[BRANCH]_PASSWORD` |                       | **Not necessary** if command is `rsync` and allow access with RSA authentication |
+| `DEP_[BRANCH]_HOST_DIR` | e.g. `/home/user/www`,`www` | Use **absolute** path if command is `rsync`, or **related** path if command is `lftp` |
 
 ###### Optional environment variables
 
 | Key                         | Value                      | Description                                            |
 |:--------------------------- |:-------------------------- |:------------------------------------------------------ |
-| `DEP_[BRANCH]_COMMAND`      | `lftp`(default) or `rsync` | Sync command                                           |
-| `DEP_[BRANCH]_FTPS`         | `yes`(default) or `no`     | [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
+| `DEP_[BRANCH]_FTPS`         | `yes` or `no`              | Default is `yes`. [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
 | `DEP_[BRANCH]_PORT`         | e.g. `2222`                | Activate only if command is `rsync` and using particular port other than `22` |
 | `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh`        | [URL allowed](#include-file)                           |
 | `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) | [URL allowed](#ignore-file) |
