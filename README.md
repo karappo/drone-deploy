@@ -86,7 +86,7 @@ It's useful if you have some common settings between remote environments.
 | Key                         | Value                      | Description                                            |
 |:--------------------------- |:-------------------------- |:------------------------------------------------------ |
 | `DEP_[BRANCH]_COMMAND`      | `lftp`(default) or `rsync` | Command                                                |
-| `DEP_[BRANCH]_FTPS`         | `yes` or `no`              | [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
+| `DEP_[BRANCH]_FTPS`         | `yes`(default) or `no`     | [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
 | `DEP_[BRANCH]_PORT`         | e.g. `2222`                | Activate only if command is `rsync` and using particular port other than `22` |
 | `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh`        | [URL allowed](#include-file)                           |
 | `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) | [URL allowed](#ignore-file) |
