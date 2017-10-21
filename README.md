@@ -58,11 +58,11 @@ build:
 
 ##### clone.depth
 
-Setting it `1` is recommended, because of making cloning faster.
+Setting this to `1` is recommended, because of making cloning faster.
 
 ##### build.image
 
-Setting `karappo/dronedeploy` is recommended, because it's been installed necessary tools already, so this makes builds fater.
+Setting this to `karappo/dronedeploy` is recommended, because it's been installed necessary tools already, so this makes builds fater.
 Ref: [karappo/dronedeploy](https://hub.docker.com/r/karappo/dronedeploy/~/dockerfile/)
 
 ##### build.environment \[required\]
