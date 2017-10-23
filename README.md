@@ -2,7 +2,7 @@
 
 This is a useful scripts collection for deploying with [Drone CI](https://github.com/drone/drone).
 
-_Compatible: Drone v0.4_
+_[Compatible: Drone v0.4](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)_
 
 ![How "drone-deploy" works](./how-drone-deploy-works.png)
 
