@@ -84,11 +84,11 @@ It's useful if you have some common settings between remote environments.
 
 ###### Optional environment variables
 
-| Key                         | Value                      | Description                                            |
-|:--------------------------- |:-------------------------- |:------------------------------------------------------ |
-| `DEP_[BRANCH]_FTPS`         | `yes` or `no`              | Default is `yes`. [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
-| `DEP_[BRANCH]_PORT`         | e.g. `2222`                | Activate only if command is `rsync` and using particular port other than `22` |
-| `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh`        | [URL allowed](#include-file)                           |
+| Key                         | Value               | Description |
+|:--------------------------- |:------------------- |:----------- |
+| `DEP_[BRANCH]_FTPS`         | `yes` or `no`       | Default is `yes`. [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
+| `DEP_[BRANCH]_PORT`         | e.g. `2222`         | Activate only if command is `rsync` and using particular port other than `22` |
+| `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh` | [URL allowed](#include-file) |
 | `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) | [URL allowed](#ignore-file) |
 
 ##### build.commands \[required\]
