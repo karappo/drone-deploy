@@ -17,13 +17,15 @@ _[Drone v0.4 Compatible](https://github.com/karappo/drone-deploy/branches/all?ut
 
 This scripts are triggered by Drone's [Deployments](https://github.com/drone/drone#deployments). It will get [this file](https://raw.githubusercontent.com/karappo/drone-deploy/update-readme/deploy.sh) hosted on this repository. This means that changes on this repository may affect your deployment immediately. So you shouldn't use this directly, you should fork this at first, then change [these parts](https://github.com/karappo/drone-deploy/search?utf8=%E2%9C%93&q=https%3A%2F%2Fraw.githubusercontent.com%2Fkarappo%2Fdrone-deploy) to yours. (just replace `karappo/drone-deploy/` to `your-acocunt/drone-deploy/`)
 
-### 2. Setup Drone
+### 2. Setup Drone on your server
 
 Please install following [this instruction](http://readme.drone.io/0.4/setup/overview/).
 
 Ref: [Easily install Drone on Digital Ocean (Japanese)](https://qiita.com/naokazuterada/items/d040ad27e77b587ef49f)
 
 _[This branch list shows drone compatibles.](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)_
+
+### 3. Done! (See 'Usage')
 
 ## Usage
 
