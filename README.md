@@ -47,10 +47,10 @@ clone:
 build:
   image: karappo/dronedeploy
   environment:
-    - DEP_MASTER_HOST=[ftphost]
-    - DEP_MASTER_USER=[username]
-    - DEP_MASTER_PASSWORD=[password]
-    - DEP_MASTER_HOST_DIR=www
+    - DEP_MASTER_HOST='ftphost'
+    - DEP_MASTER_USER='username'
+    - DEP_MASTER_PASSWORD='password'
+    - DEP_MASTER_HOST_DIR='www'
   commands:
     - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 ```
