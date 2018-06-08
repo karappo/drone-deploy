@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # for PHP website deploy
-
+# TODO
+# 
+# 例：www.m13.coreserver.jp
 before_sync(){
 
   # ==================================
@@ -12,7 +14,7 @@ before_sync(){
   log '- SSH Registration'
   MYIP=`wget -q -O - http://dyn.value-domain.com/cgi-bin/dyn.fcg?ip`
   log "- SSH Registration -> My IP: $MYIP"
-  RET=`wget -q -O - --post-data="id=$DEP_USER&pass=$DEP_PASSWORD&remote_host=$MYIP&ssh2=SSH登録" https://ss1.coressl.jp/www.m13.coreserver.jp/jp/admin.cgi?telnet=1 | iconv -f cp932 -t utf-8`
+  RET=`wget -q -O - --post-data="id=$DEP_USER&pass=$DEP_PASSWORD&remote_host=$MYIP&ssh2=SSH登録" "https://ss1.coressl.jp/$DEP_HOST/jp/admin.cgi?telnet=1" | iconv -f cp932 -t utf-8`
   if [ `log "$RET" | egrep "データベースに追加しました"` ] ; then
     log '- SSH Registration -> Registration Successful.'
   else
