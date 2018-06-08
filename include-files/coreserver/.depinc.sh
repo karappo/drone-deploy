@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # for PHP website deploy
-# TODO
-# 
-# 例：www.m13.coreserver.jp
+# SSH登録は反映までに５分程度必要なので、同期が失敗してもrebuildすれば次回は成功するはず
+
 before_sync(){
 
   # ==================================
