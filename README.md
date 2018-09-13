@@ -47,7 +47,7 @@ clone:
 build:
   image: karappo/dronedeploy
   environment:
-    - DEP_MASTER_COMMAND=lftp
+    - DEP_MASTER_COMMAND='lftp'
     - DEP_MASTER_HOST='ftphost'
     - DEP_MASTER_USER='username'
     - DEP_MASTER_PASSWORD='password'
