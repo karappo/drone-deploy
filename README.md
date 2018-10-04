@@ -47,14 +47,15 @@ clone:
 build:
   image: karappo/dronedeploy
   environment:
-    - DEP_MASTER_COMMAND='lftp'
-    - DEP_MASTER_HOST='ftphost'
+    - DEP_MASTER_COMMAND='rsync'
+    - DEP_MASTER_HOST='sample.com'
     - DEP_MASTER_USER='username'
-    - DEP_MASTER_PASSWORD='password'
-    - DEP_MASTER_HOST_DIR='www'
+    - DEP_MASTER_HOST_DIR='htdocs'
   commands:
     - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 ```
+
+Make sure your access
 
 ### Explaination of variables
 
@@ -80,7 +81,7 @@ It's useful if you have some common settings between remote environments.
 | Key                     | Value                 | Description          |
 |:----------------------- |:--------------------  |:-------------------- |
 | `DEP_[BRANCH]_COMMAND`  | `rsync` or `lftp`     | Sync command (`rsync` is recommended) |
-| `DEP_[BRANCH]_HOST`     | e.g. `ftp.sample.com` | Target remote host   |
+| `DEP_[BRANCH]_HOST`     | e.g. `sample.com` | Target remote host   |
 | `DEP_[BRANCH]_USER`     |                       | SSH or FTP username  |
 | `DEP_[BRANCH]_PASSWORD` |                       | **Not necessary** if command is `rsync` and allow access with RSA authentication |
 | `DEP_[BRANCH]_HOST_DIR` | e.g. `/home/user/www`,`www` | Use **absolute** path if command is `rsync`, or **related** path if command is `lftp` |
