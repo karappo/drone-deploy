@@ -81,7 +81,7 @@ It's useful if you have some common settings between remote environments.
 | Key                     | Value                 | Description          |
 |:----------------------- |:--------------------  |:-------------------- |
 | `DEP_[BRANCH]_COMMAND`  | `rsync` or `lftp`     | Sync command (`rsync` is recommended) |
-| `DEP_[BRANCH]_HOST`     | e.g. `sample.com` | Target remote host   |
+| `DEP_[BRANCH]_HOST`     | e.g. `sample.com`     | Target remote host   |
 | `DEP_[BRANCH]_USER`     |                       | SSH or FTP username  |
 | `DEP_[BRANCH]_PASSWORD` |                       | **Not necessary** if command is `rsync` and allow access with RSA authentication |
 | `DEP_[BRANCH]_HOST_DIR` | e.g. `/home/user/www`,`www` | Use **absolute** path if command is `rsync`, or **related** path if command is `lftp` |
