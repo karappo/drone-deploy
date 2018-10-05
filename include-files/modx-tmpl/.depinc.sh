@@ -19,27 +19,27 @@ before_sync(){
   rm -rf ./core/cache/*
 
   # remove "DEP_XXX_RM "
-  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \;
-  sudo find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \;
-  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \;
-  sudo find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \;
+  find . -name "*.htaccess" -exec sed -i$ext "s|#DEP_REMOTE_RM ||" {} \;
+  find . -name "*.htaccess" -exec sed -i$ext "s|#RM_SYNC_${DRONE_BRANCH^^} ||" {} \;
+  find . -name "*.php" -exec sed -i$ext "s|//DEP_REMOTE_RM ||" {} \;
+  find . -name "*.php" -exec sed -i$ext "s|//DEP_${DRONE_BRANCH^^}_RM ||" {} \;
 
   # [TODO]
   # ファイルディレクトリをリモート用に変換。「/Users/terada/Sites/example.com」と「/home/remote/example.com」の部分を適宜設定すること
-  sudo find . -name "*.php" -exec sed -i$ext "s|/Users/terada/Sites/example.com|/home/remote/example.com|g" {} \;
+  find . -name "*.php" -exec sed -i$ext "s|/Users/terada/Sites/example.com|/home/remote/example.com|g" {} \;
 
   # [TODO]
   # 「localhost」をリモート用に変換
-  sudo find . -name "*.php" -exec sed -i$ext "s|localhost|$DEP_HOST|g" {} \;
+  find . -name "*.php" -exec sed -i$ext "s|localhost|$DEP_HOST|g" {} \;
 
   # [TODO]
   # OPTIONAL
   # リモートのDBサーバーへのアクセスが「localhost」のみの場合はもう一度元に戻しておく
-  # sudo find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_server = '$DEP_HOST';|database_server = 'localhost';|" {} \;
-  # sudo find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_dsn = 'mysql:host=$DEP_HOST;|database_dsn = 'mysql:host=localhost;|" {} \;
+  # find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_server = '$DEP_HOST';|database_server = 'localhost';|" {} \;
+  # find . -name "*config.inc.php" -exec sed -i".temp_bakup" "s|database_dsn = 'mysql:host=$DEP_HOST;|database_dsn = 'mysql:host=localhost;|" {} \;
 
   # delete backup files
-  sudo find . -name "*$ext" -exec rm {} \;
+  find . -name "*$ext" -exec rm {} \;
 
   return
 }

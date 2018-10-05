@@ -31,7 +31,7 @@ do_sync()
   # download defaults if ignore file isn't exists
   if [ ${DEP_IGNORE_FILE:-isnil} = "isnil" -o ! -f "$DEP_IGNORE_FILE" ]; then
     log "| Downloading default ignore file..."
-    sudo wget -O .depignore https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore
+    wget -O .depignore https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore
     DEP_IGNORE_FILE=$PWD/.depignore
   fi
 
@@ -188,7 +188,7 @@ fi
 if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
   if [ "${DEP_INCLUDE_FILE:0:7}" = "http://" -o "${DEP_INCLUDE_FILE:0:8}" = "https://" ]; then
     log "| Downloading include file..."
-    sudo wget -O .depinc.sh $DEP_INCLUDE_FILE
+    wget -O .depinc.sh $DEP_INCLUDE_FILE
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
   fi
 fi
