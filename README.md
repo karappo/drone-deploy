@@ -132,7 +132,7 @@ You should set your include file with related path from your project's root.
 ```yml
 build:
   environment:
-    - DEP_MASTER_INCLUDE_FILE=./.depinc.sh
+    - DEP_REMOTE_INCLUDE_FILE=./.depinc.sh
 ```
 
 Or you can set this as URL.
@@ -142,7 +142,7 @@ Or you can set this as URL.
 ```yml
 build:
   environment:
-    - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/wordpress/.depinc.sh
+    - DEP_REMOTE_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/wordpress/.depinc.sh
 ```
 
 If you set like above, these process below will be executed.
@@ -150,7 +150,7 @@ If you set like above, these process below will be executed.
 
 1. Remove `#DEP_REMOTE_RM ` and `#DEP_[BRANCH]_RM ` in `.htaccess` file
 2. Remove `//DEP_REMOTE_RM ` and `//DEP_[BRANCH]_RM ` in `.php` files
-3. Set the desired permissions for specific files and directories after syncing
+3. Set the recommended permissions for WordPress after syncing
 
 Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/master/include-files/wordpress/.depinc.sh)
 
