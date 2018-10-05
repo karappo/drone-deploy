@@ -64,7 +64,7 @@ do_sync()
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
         # Specific port
         log "- rsync port: $DEP_PORT"
-        if rsync -aIzhv --stats --delete -e "ssh -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+        if rsync -aIzhv --stats --delete -e "ssh -i /root/.ssh/id_rsa -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
           log "- sync -> done."
         else
           log "- sync -> [ERROR]"
