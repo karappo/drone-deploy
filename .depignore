@@ -11,7 +11,7 @@ package.json
 package-lock.json
 README
 README.*
-.ruby-version
+.*-version
 Gemfile
 Gemfile.lock
 yarn.lock
