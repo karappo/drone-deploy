@@ -142,7 +142,7 @@ Or you can set this as URL.
 ```yml
 build:
   environment:
-    - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/php/.depinc.sh
+    - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/wordpress/.depinc.sh
 ```
 
 If you set like above, these process below will be executed.
@@ -150,8 +150,9 @@ If you set like above, these process below will be executed.
 
 1. Remove `#DEP_REMOTE_RM ` and `#DEP_[BRANCH]_RM ` in `.htaccess` file
 2. Remove `//DEP_REMOTE_RM ` and `//DEP_[BRANCH]_RM ` in `.php` files
+3. Set the desired permissions for specific files and directories after syncing
 
-Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/master/include-files/php/.depinc.sh)
+Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/master/include-files/wordpress/.depinc.sh)
 
 In WordPress project, you can write code like this.
 
@@ -209,6 +210,18 @@ And you can activate Basic Auth only in staging branch's target environment with
 #DEP_STAGING_RM order deny,allow
 # ----------- / Basic Authentication
 ```
+
+#### File Permissions
+
+This is default permissions, you can edit for each project you have.
+
+```sh
+find ./ -type d -exec chmod 705 {} \;
+find ./ -type f -exec chmod 604 {} \;
+chmod 606 .htaccess
+chmod 600 wp/wp-config.php
+```
+
 
 ### Prepared include files
 
