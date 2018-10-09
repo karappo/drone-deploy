@@ -2,7 +2,7 @@
 
 This is a useful scripts collection for deploying with [Drone CI](https://github.com/drone/drone).
 
-_[Drone v0.4 Compatible](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)_
+_[Drone v0.8 Compatible](https://github.com/karappo/drone-deploy/branches/all?utf8=%E2%9C%93&query=drone-compatible)_
 
 ![How "drone-deploy" works](./how-drone-deploy-works.png)
 
@@ -52,7 +52,7 @@ build:
     - DEP_MASTER_USER='username'
     - DEP_MASTER_HOST_DIR='htdocs'
   commands:
-    - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
+    - curl https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/deploy.sh | bash
 ```
 
 Make sure your access
@@ -93,7 +93,7 @@ It's useful if you have some common settings between remote environments.
 | `DEP_[BRANCH]_FTPS`         | `yes` or `no`       | Default is `yes`. [Set `no` only if remote doesn't accept FTPS](#disable-deployment-on-particular-timing) |
 | `DEP_[BRANCH]_PORT`         | e.g. `2222`         | Activate only if command is `rsync` and using particular port other than `22` |
 | `DEP_[BRANCH]_INCLUDE_FILE` | e.g. `./.depinc.sh` | [URL allowed](#include-file) |
-| `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/master/.depignore) | [URL allowed](#ignore-file) |
+| `DEP_[BRANCH]_IGNORE_FILE`  | e.g. `./.depignore`, [default](https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/.depignore) | [URL allowed](#ignore-file) |
 
 ##### build.commands \[required\]
 
@@ -142,7 +142,7 @@ Or you can set this as URL.
 ```yml
 build:
   environment:
-    - DEP_REMOTE_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/wordpress/.depinc.sh
+    - DEP_REMOTE_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/include-files/wordpress/.depinc.sh
 ```
 
 If you set like above, these process below will be executed.
@@ -152,7 +152,7 @@ If you set like above, these process below will be executed.
 2. Remove `//DEP_REMOTE_RM ` and `//DEP_[BRANCH]_RM ` in `.php` files
 3. Set the recommended permissions for WordPress after syncing
 
-Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/master/include-files/wordpress/.depinc.sh)
+Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/drone-compatible/v0.8/include-files/wordpress/.depinc.sh)
 
 In WordPress project, you can write code like this.
 
@@ -225,7 +225,7 @@ chmod 600 wp/wp-config.php
 
 ### Prepared include files
 
-There are some files for particular purposes or environments under the directory [`include-files`](https://github.com/karappo/drone-deploy/tree/master/include-files).
+There are some files for particular purposes or environments under the directory [`include-files`](https://github.com/karappo/drone-deploy/tree/drone-compatible/v0.8/include-files).
 
 
 ## Ignore file
