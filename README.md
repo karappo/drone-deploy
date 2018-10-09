@@ -99,10 +99,8 @@ Please set secrets named `ssh_key` on your drone dashboard.
 
 You may use ssh-keygen
 ```sh
-ssh-keygen -t rsa
+ssh-keygen -f ~/Desktop/ssh_key -C 'project_name@drone.your.domain'
 ```
-
-or [Online RSA Key Generator](http://travistidwell.com/jsencrypt/demo/).
 
 ## Include file
 
