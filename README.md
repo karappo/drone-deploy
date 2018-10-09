@@ -42,20 +42,21 @@ The following contents are recommended.
 .drone.yml
 
 ```yml
-clone:
-  depth: 1
-build:
-  image: karappo/dronedeploy
-  environment:
-    - DEP_MASTER_COMMAND='rsync'
-    - DEP_MASTER_HOST='sample.com'
-    - DEP_MASTER_USER='username'
-    - DEP_MASTER_HOST_DIR='htdocs'
-  commands:
-    - curl https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/deploy.sh | bash
+pipeline:
+  build:
+    image: karappo/dronedeploy:drone-0.8
+    environment:
+      - DEP_MASTER_COMMAND='rsync'
+      - DEP_MASTER_HOST='sample.com'
+      - DEP_MASTER_USER='username'
+      - DEP_MASTER_HOST_DIR='htdocs'
+    commands:
+      - echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      - curl https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/deploy.sh | bash
+    secrets: [ ssh_key ]
 ```
 
-Make sure your access
+*Please det `ssh_key` secrets on your drone dashboard.*
 
 ### Explaination of variables
 
