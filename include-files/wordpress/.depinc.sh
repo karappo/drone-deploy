@@ -39,6 +39,10 @@ stat -f \"%N %Mp%Lp\" wp/wp-content/uploads
 echo ---------------------------------
 echo ''
 ' > script.sh"
-  ssh $DEP_USER@$DEP_HOST 'bash -s' < script.sh
+  if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
+    ssh $DEP_USER@$DEP_HOST -p $DEP_PORT 'bash -s' < script.sh
+  else
+    ssh $DEP_USER@$DEP_HOST 'bash -s' < script.sh
+  fi
   rm -f script.sh
 }
