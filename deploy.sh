@@ -33,6 +33,11 @@ do_sync()
     log "| Downloading default ignore file..."
     wget -O .depignore https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/.depignore
     DEP_IGNORE_FILE=$PWD/.depignore
+    # Check file readability
+    if [ ! -r "$DEP_IGNORE_FILE" ]; then
+      log "- ERROR -> Not readable file: $DEP_IGNORE_FILE"
+      exit 1
+    fi
   fi
 
   log "- ignore file -> $DEP_IGNORE_FILE"
@@ -190,6 +195,11 @@ if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
     log "| Downloading include file..."
     wget -O .depinc.sh $DEP_INCLUDE_FILE
     DEP_INCLUDE_FILE=$PWD/.depinc.sh
+    # Check file readability
+    if [ ! -r "$DEP_INCLUDE_FILE" ]; then
+      log "- ERROR -> Not readable file: $DEP_INCLUDE_FILE"
+      exit 1
+    fi
   fi
 fi
 
