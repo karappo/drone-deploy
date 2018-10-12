@@ -42,6 +42,10 @@ The following contents are recommended.
 .drone.yml
 
 ```yml
+clone:
+  git:
+    image: plugins/git
+    recursive: true
 pipeline:
   build:
     image: karappo/dronedeploy:drone-0.8
@@ -57,6 +61,11 @@ pipeline:
 ```
 
 ### Explaination of variables
+
+#### clone.git.recursive
+
+If you want to ignore submodules, you can set `false` to disable git recursive clone.
+This is optional. If you don't need it, you can remove the first 4 lines. Because default value is `true`.
 
 ##### pipeline.build.image
 
