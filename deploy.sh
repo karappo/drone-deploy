@@ -37,6 +37,8 @@ do_sync()
     if [ ! -r "$DEP_IGNORE_FILE" ]; then
       log "- ERROR -> Not readable file: $DEP_IGNORE_FILE"
       exit 1
+    else
+      log "Donwload successfuly."
     fi
   fi
 
@@ -199,6 +201,8 @@ if [ "${DEP_INCLUDE_FILE:+isexists}" = "isexists" ]; then
     if [ ! -r "$DEP_INCLUDE_FILE" ]; then
       log "- ERROR -> Not readable file: $DEP_INCLUDE_FILE"
       exit 1
+    else
+      log "Donwload successfuly."
     fi
   fi
 fi
