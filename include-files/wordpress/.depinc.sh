@@ -26,8 +26,8 @@ cd '${DEP_HOST_DIR}'
 # Set permissions
 find ./ -type d -exec chmod 705 {} \;
 find ./ -type f -exec chmod 604 {} \;
-chmod 604 .htaccess
-chmod 400 wp/wp-config.php
+find ./ -name .htaccess -exec chmod 604 {} \;
+find ./ -name wp-config.php -exec chmod 400 {} \;
 
 echo ''
 echo --- Check Permissions -----------
