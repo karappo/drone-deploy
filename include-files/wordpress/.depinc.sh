@@ -23,12 +23,13 @@ after_sync(){
   sh -c "echo '
 cd '${DEP_HOST_DIR}'
 
-# Set permissions
+echo ''
+echo --- Set Permissions -------------
 find ./ -type d -exec chmod 705 {} \;
 find ./ -type f -exec chmod 604 {} \;
 find ./ -name .htaccess -exec chmod 604 {} \;
 find ./ -name wp-config.php -exec chmod 400 {} \;
-
+echo ---------------------------------
 echo ''
 echo --- Check Permissions -----------
 stat -f \"%N %Mp%Lp\" .htaccess
