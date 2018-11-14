@@ -15,6 +15,9 @@ README.*
 Gemfile
 Gemfile.lock
 yarn.lock
+.editorconfig
+.eslintrc.js
+composer.*
 
 # drone-deploy
 .depignore
