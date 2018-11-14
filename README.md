@@ -46,6 +46,9 @@ clone:
   git:
     image: plugins/git
     recursive: true
+    depth: 1
+    submodule_override:
+      path/to/submodule: https://github.com:443/someone/sample.git
 pipeline:
   build:
     image: karappo/dronedeploy:drone-0.8
@@ -66,6 +69,18 @@ pipeline:
 
 If you want to ignore submodules, you can set `false` to disable git recursive clone.
 This is optional. If you don't need it, you can remove the first 4 lines. Because default value is `true`.
+
+##### clone.git.depth
+
+To set `1` is recommended, because of making cloning faster.
+
+##### clone.git.submodule_override
+
+key: Set the `path` value in .gitmodules<br>
+value: Replacement URL(https, **needs port setting**) with the `url` value in .gitmodules.
+
+Ref:
+- [Official Document](http://plugins.drone.io/drone-plugins/drone-git/)
 
 ##### pipeline.build.image
 
