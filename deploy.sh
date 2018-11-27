@@ -53,7 +53,7 @@ do_sync()
 
     if [ "${DEP_PASSWORD:+isexists}" = "isexists" ]; then
       log '- rsync with password'
-      if sshpass -p "$DEP_PASSWORD" rsync -aIzhv --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+      if sshpass -p "$DEP_PASSWORD" rsync -aIzh --stats --delete -e ssh "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
         log "- sync -> done."
       else
         log "- sync -> [ERROR]"
@@ -68,7 +68,7 @@ do_sync()
       if [ "${DEP_PORT:+isexists}" = "isexists" ]; then
         # Specific port
         log "- rsync port: $DEP_PORT"
-        if rsync -aIzhv --stats --delete -e "ssh -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+        if rsync -aIzh --stats --delete -e "ssh -p $DEP_PORT" "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
           log "- sync -> done."
         else
           log "- sync -> [ERROR]"
@@ -77,7 +77,7 @@ do_sync()
       else
         # Default port
         log '- rsync default port'
-        if rsync -aIzhv --stats --delete "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
+        if rsync -aIzh --stats --delete "$opt_exclude" . "$DEP_USER@$DEP_HOST:$DEP_HOST_DIR"; then
           log "- sync -> done."
         else
           log "- sync -> [ERROR]"
