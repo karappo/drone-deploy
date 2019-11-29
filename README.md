@@ -179,6 +179,9 @@ If you set like above, these process below will be executed.
 
 Ref: [.depinc.sh](https://github.com/karappo/drone-deploy/blob/drone-compatible/v0.8/include-files/wordpress/.depinc.sh)
 
+
+#### For WordPress
+
 In WordPress project, you can write code like this.
 
 wp-config.php
