@@ -49,6 +49,8 @@ clone:
     depth: 1
     submodule_override:
       path/to/submodule: https://github.com:443/someone/sample.git
+    when:
+      branch: [ master ]
 pipeline:
   build:
     image: karappo/dronedeploy:drone-0.8
@@ -81,6 +83,10 @@ value: Replacement URL(https, **needs port setting**) with the `url` value in .g
 
 Ref:
 - [Official Document](http://plugins.drone.io/drone-plugins/drone-git/)
+
+##### clone.git.when.branch
+
+Adding conditions for cloning is recomended otherwise drone will do "cloning" after every branch pushing. Especialy you should check this configration when having heavy "build".
 
 ##### pipeline.build.image
 
