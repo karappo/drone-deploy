@@ -176,6 +176,8 @@ build:
     - DEP_REMOTE_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/include-files/wordpress/.depinc.sh
 ```
 
+#### Magical comment for switching environmental vars
+
 If you set like above, these process below will be executed.
 
 
