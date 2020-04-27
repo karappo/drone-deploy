@@ -5,7 +5,7 @@
 .gitattributes
 .gitignore
 .gitmodules
-Procfile
+Procfile*
 Gruntfile.*
 gulpfile.*
 package.json
