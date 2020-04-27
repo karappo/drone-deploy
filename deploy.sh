@@ -27,7 +27,7 @@ do_sync()
 
   log "- sync -> Start with $DEP_COMMAND. This could take a while..."
 
-  # download defaults if ignore file isn't exists
+  # Download defaults if the ignore file doesn’t exist.
   if [ ${DEP_IGNORE_FILE:-isnil} = "isnil" -o ! -f "$DEP_IGNORE_FILE" ]; then
     log "| Downloading default ignore file..."
     if wget -O .depignore https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/.depignore; then
